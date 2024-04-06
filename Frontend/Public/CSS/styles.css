@@ -80,6 +80,7 @@
 
   }
 
+ 
   
   @keyframes moveStars {
     from {
@@ -276,6 +277,12 @@
   color: #FFA500; /* Highlight color */
 }
 
+/* .home{
+  display: none;
+} */
+
+
+
 .rocket-container {
   display: flex;
   flex-direction: column;
@@ -289,11 +296,11 @@
 
 .rocket {
   position: absolute;
-  bottom: 50px;
+  bottom: -230px;
   left: 50%;
   transform: translateX(-50%);
-  width: 100%; /* Adjust the width of the rocket */
-  height: 100vh; /* Maintain aspect ratio */
+  width: 120%; /* Adjust the width of the rocket */
+  height: 120vh; /* Maintain aspect ratio */
   z-index: 100;
   /* display: none; */
 }
@@ -331,8 +338,8 @@
 }
 .tryit {
   position: relative;
-    left: 45%;
-  bottom: 170px;
+    /* left: 45%; */
+  bottom: 25px;
   --color: #0077ff;
   font-family: inherit;
   display: inline-block;
