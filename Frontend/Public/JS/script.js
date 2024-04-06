@@ -10,6 +10,7 @@ window.addEventListener("load", function () {
     loader.style.display = "none";
     content.style.display = "block"; // Show the content after loader hides
   }, 3000);
+  
 });
 
 //background animation
@@ -37,46 +38,37 @@ document.addEventListener("click", function (event) {
   });
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  const rocket = document.querySelector(".rocket");
-  const scrollContainer = document.scrollingElement || document.documentElement;
-  let lastScrollTop = scrollContainer.scrollTop;
-  let rocketPosition = 0;
-
-  function applyVibrationEffect() {
-    gsap.to(rocket, {
-      duration: 0.5,
-      y: "-=10",
-      repeat: -1,
-      yoyo: true,
+window.addEventListener("load", function () {
+  const loader = document.getElementById("loadingWave");
+  // const content = document.getElementById("content");
+  const homeDiv = document.getElementById("home");
+  const welcome=document.getElementById("welcome")
+  // Show the loader
+  loader.style.display = "flex";
+  
+  welcome.style.display='none';
+  
+ 
+  // After 3 seconds, hide the loader and show the content
+  setTimeout(function () {
+    loader.style.display = "none";
+    // home.style.display = "block"; // Show the content after loader hides
+    // welcome.style.display="block";
+    // Rocket animation on page load
+    gsap.to(".rocket", {
+      duration: 2.5,
+      y: -window.innerHeight,
+      opacity: 0,
       ease: "power1.inOut",
+      onComplete: function() {
+        welcome.style.display="block";
+        // After rocket flies off the screen, animate home div
+        gsap.fromTo(homeDiv, { scale: 1 }, { scale: 1.5, duration: 0.3, ease: "power1.inOut", onComplete: function() {
+          gsap.to(homeDiv, { scale: 1, duration: 0.3, ease: "power1.inOut" });
+        }});        
+      }
     });
-  }
-
-  function updateRocketPosition() {
-    const scrollTop = scrollContainer.scrollTop;
-    const scrollSpeed = scrollTop - lastScrollTop;
-
-    if (scrollSpeed > 0) {
-      rocketPosition -= 0;
-    } else {
-      gsap.to(rocket, {
-        duration: 0.6,
-        y: rocketPosition,
-        ease: "power1.inOut",
-      });
-      rocketPosition = 0;
-    }
-
-    lastScrollTop = scrollTop;
-  }
-
-  window.addEventListener("scroll", function () {
-    applyVibrationEffect();
-    updateRocketPosition();
-  });
-
-  applyVibrationEffect();
+  }, 3000);
 });
 
 //-------
@@ -159,7 +151,7 @@ document
 
       const translatedText = await response.json();
       document.getElementById("output-text").textContent = translatedText[0];
-      setTimeout(showPopup, 1000); // Show popup after 1 second delay
+      setTimeout(showPopup, 5000); // Show popup after 1 second delay
     } catch (error) {
       console.error("Translation error:", error);
       document.getElementById("output-text").textContent =
