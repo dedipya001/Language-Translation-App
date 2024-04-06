@@ -231,7 +231,7 @@ stars2.forEach((star, index) => {
 
     console.log("Star selected:", index + 1, "Rating:", ratingValue);
     console.log(
-      "Input Language:",
+      "Input Language:", 
       inputLanguage,
       "Output Language:",
       outputLanguage
@@ -377,3 +377,6 @@ function download() {
   // You need to replace 'textfile.txt' with the actual file path
   window.location.href = "textfile.txt";
 }
+
+
+//lets see the code
