@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BhashaBinge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400..800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/CSS/styles.css" />
+</head>
+
+<body>
+
+  <div class="loading-wave" id="loadingWave">
+    <div class="loading-bar"></div>
+    <div class="loading-bar"></div>
+    <div class="loading-bar"></div>
+    <div class="loading-bar"></div>
+  </div>
+
+  <div class="background-container">
+    <img src="/img/infi.png" alt="StarsBackground" class="background-image">
+  </div>
+
+
+  <div id="content" style="display: none;"> <!-- Initially hidden -->
+    <header class="header" id="header">
+      <nav class="nav container">
+        <a href="#" class="nav__logo">
+          <span class="nav__logo-circle">BB</span>
+          <span class="nav__logo-name">BhashaBinge</span>
+        </a>
+
+        <ul class="nav__list">
+          <li class="nav__item">
+            <a href="" class="nav__link active-link">Home</a>
+          </li>
+          <li class="nav__item">
+            <a href="#about" class="nav__link">About Website</a>
+          </li>
+          <li class="nav__item dropdown">
+            <a href="#services" class="nav__link" onclick="toggleDropdown(event)">Services <i
+                class="ri-arrow-down-s-fill"></i></a>
+            <ul class="dropdown-content sub-menu">
+              <li><a href="#" class="sub-menu__link">Text Translation</a></li>
+              <li><a href="#" class="sub-menu__link">Text File Translation</a></li>
+            </ul>
+          </li>
+        </ul>
+
+      </nav>
+    </header>
+    <!-- <div style="height: 1600px;"></div> -->
+    <section class="home" id="home">
+      <div class="home__container container">
+        <div class="rocket-container">
+          <img src="/img/rocket.png" alt="Rocket" class="rocket">
+          <div class="welcome-text" id="welcome">
+            <div class="line1">Welcome to</div>
+            <div class="line2">BhashaBinge</div>
+            <div class="tagline">
+              <p>In the bazaar of Indian languages, we're your trusted translators</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="btn-container">
+      <button class="tryit" onclick="smoothScroll('#translcontainer')">Try it Now</button>
+
+    </div>
+
+
+    <div class="transcontainer" id="translcontainer">
+      <div class="option1">
+        <p>Text Translation</p>
+      </div>
+      <label class="switch">
+        <input role="switch" type="checkbox" class="switch__input" />
+        <span class="switch__bg"></span>
+        <span class="switch__label">Power</span>
+      </label>
+
+      <div class="option2">
+        <p>Text File Translation</p>
+      </div>
+
+    </div>
+    <!-- translation section -->
+    <div class="translationcontainer">
+      <div class="texttranslation">
+        <form id="transcontainer">
+          <div class="translation-card" id="translation-card">
+            <h2>Lost in words? We navigate.</h2>
+            <div class="input-container">
+              <label for="input-language"><span class="langtext">Input Language:</span></label>
+              <select id="input-language" class="input1">
+                <option value="english">English</option>
+                <option value="hindi">Hindi</option><span>
+                  <option value="bengali">Bengali</option>
+                  <option value="telugu">Telugu</option>
+                  <option value="tamil">Tamil</option>
+              </select>
+            </div>
+            <div class="input-container">
+              <label for="output-language"><span class="langtext">Output Language:</span>
+                </span></label>
+              <select id="output-language" class="input1">
+                <option value="english">English</option>
+                <option value="hindi">Hindi</option>
+                <option value="bengali">Bengali</option>
+                <option value="telugu">Telugu</option>
+                <option value="tamil">Tamil</option>
+              </select>
+            </div>
+            <div class="input-container textfield">
+              <label for="input-text"><span class="langtext">Input Text:</span></label>
+              <textarea id="input-text" class="input2" rows="4" placeholder="Enter your text here"></textarea>
+            </div>
+            <div class="input-container">
+              <label for="output-text"><span class="langtext">Output Text:</span></label>
+              <textarea id="output-text" class="input2" rows="4" readonly></textarea>
+            </div>
+            <button class="button-confirm" type="submit">Submit</button>
+
+            <div class="originalrating">
+              <p class="title" style="margin-bottom: 0px ;"> Rate our Translations</p>
+
+              <div class="radio-input" style="margin-top: 0px;">
+                <input class="star s1" type="radio" id="value-1" name="value-radio" value="value-1">
+                <input class="star s2" type="radio" id="value-2" name="value-radio" value="value-2">
+                <input class="star s3" type="radio" id="value-3" name="value-radio" value="value-3">
+                <input class="star s4" type="radio" id="value-4" name="value-radio" value="value-4">
+                <input class="star s5" type="radio" id="value-5" name="value-radio" value="value-5">
+
+              </div>
+
+              <h2 class="title"> We constantly monitor feedback to improve translations. </h2>
+
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="translation-card">
+
+
+        <div class="textfiletranslation">
+          <h2>Want to try Text File Translation.</h2>
+          <div class="input-container">
+            <label for="input-language"><span class="langtext">Input Language:</span></label>
+            <select id="input-language2" class="input1">
+              <option value="english">English</option>
+              <option value="hindi">Hindi</option><span>
+                <option value="bengali">Bengali</option>
+                <option value="telugu">Telugu</option>
+                <option value="tamil">Tamil</option>
+            </select>
+          </div>
+          <div class="input-container">
+            <label for="output-language" class="output-language"><span class="langtext">Output Language:</span>
+              </span></label>
+            <select id="output-language2" class="input1">
+              <option value="english">English</option>
+              <option value="hindi">Hindi</option>
+              <option value="bengali">Bengali</option>
+              <option value="telugu">Telugu</option>
+              <option value="tamil">Tamil</option>
+            </select>
+          </div>
+          <label for="file" class="custum-file-upload">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z"
+                    fill=""></path>
+                </g>
+              </svg>
+            </div>
+            <div class="text">
+              <span>Click to upload a .txt File</span>
+            </div>
+            <input id="file" type="file">
+          </label>
+          <div class="buttonsubmit">
+            <button class="button-confirm" id="button-submit" type="submit">Submit</button>
+          </div>
+
+          <div class="preview-container">
+            <div id="preview" class="preview">
+              <p><span>The preview of the translated file will appear here : </span></p>
+              <div class="api-response-container" id="api-response-container">
+                <p id="api-response"> <span>Waiting for API response...</span></p>
+              </div>
+
+              <div class="download" id="downloadbutton">
+                <button class="button-download button-confirm" id="button-download" type="button"
+                  onclick="download()">Download</button>
+
+
+              </div>
+
+            </div>
+          </div>
+          <div class="originalrating">
+            <p class="title" style="margin-bottom: 0px ;"> Rate our Translations</p>
+
+            <div class="radio-input" style="margin-top: 0px;">
+              <input class="starz s6 s" type="radio" id="value-1" name="value-radio" value="value-1">
+              <input class="starz s7 s" type="radio" id="value-2" name="value-radio" value="value-2">
+              <input class="starz s8 s" type="radio" id="value-3" name="value-radio" value="value-3">
+              <input class="starz s9 s" type="radio" id="value-4" name="value-radio" value="value-4">
+              <input class="starz s10 s" type="radio" id="value-5" name="value-radio" value="value-5">
+
+            </div>
+
+            <h2 class="title"> We constantly monitor feedback to improve translations. </h2>
+
+          </div>
+
+
+
+
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="popup">
+      <div class="popup-content">
+        <span class="close-btn">X</span>
+        <h2>Are you satisfied with the translation?</h2>
+        <div class="radio-input">
+          <input class="star s1" type="radio" id="value-1" name="value-radio" value="value-1">
+          <input class="star s2" type="radio" id="value-2" name="value-radio" value="value-2">
+          <input class="star s3" type="radio" id="value-3" name="value-radio" value="value-3">
+          <input class="star s4" type="radio" id="value-4" name="value-radio" value="value-4">
+          <input class="star s5" type="radio" id="value-5" name="value-radio" value="value-5">
+
+        </div>
+
+
+      </div>
+    </div>
+
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <h2>BhashaBinge</h2>
+            </div>
+            <div class="col-md-3">
+                <h5>About Us</h5>
+                <p>
+                    BhashaBinge is a newage app that provides language translational services for languages spoken in India. This is a software built by a group of 4 students from SRM University, Andhra Pradesh. We aim to provide a seamless experience for our users.
+                </p>
+            </div>
+            <div class="col-md-3">
+                <h5>Contact Us</h5>
+                <ul class="list-unstyled">
+                    <li>Email: dedipyagoswami001@gmail.com</li>
+                    <!-- <li> Currently living in Vijayawada, Andhra Pradesh</li> -->
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <div class="leftfooter"></div>
+                <div class="card">
+                    <div class="background"></div>
+                    <div class="logo">Socials</div>
+
+                    <a href="#">
+                        <div class="box box1">
+                            <span class="icon">
+                                <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" class="svg">
+                                    <path d="M 9.9980469 3 C 6.1390469 3 3 6.1419531 3 10.001953 L 3 20.001953 C 3 23.860953 6.1419531 27 10.001953 27 L 20.001953 27 C 23.860953 27 27 23.858047 27 19.998047 L 27 9.9980469 C 27 6.1390469 23.858047 3 19.998047 3 L 9.9980469 3 z M 22 7 C 22.552 7 23 7.448 23 8 C 23 8.552 22.552 9 22 9 C 21.448 9 21 8.552 21 8 C 21 7.448 21.448 7 22 7 z M 15 9 C 18.309 9 21 11.691 21 15 C 21 18.309 18.309 21 15 21 C 11.691 21 9 18.309 9 15 C 9 11.691 11.691 9 15 9 z M 15 11 A 4 4 0 0 0 11 15 A 4 4 0 0 0 15 19 A 4 4 0 0 0 19 15 A 4 4 0 0 0 15 11 z"></path>
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <a href="##">
+                        <div class="box box2">
+                            <span class="icon">
+                                <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" class="svg">
+                                    <path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path>
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <a href="###">
+                        <div class="box box3">
+                            <span class="icon">
+                                <svg viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg" class="svg">
+                                    <path d="M524.531,69.836a1.5,1.5,0,0,0-.764-.7A485.065,485.065,0,0,0,404.081,32.03a1.816,1.816,0,0,0-1.923.91,337.461,337.461,0,0,0-14.9,30.6,447.848,447.848,0,0,0-134.426,0,309.541,309.541,0,0,0-15.135-30.6,1.89,1.89,0,0,0-1.924-.91A483.689,483.689,0,0,0,116.085,69.137a1.712,1.712,0,0,0-.788.676C39.068,183.651,18.186,294.69,28.43,404.354a2.016,2.016,0,0,0,.765,1.375A487.666,487.666,0,0,0,176.02,479.918a1.9,1.9,0,0,0,2.063-.676A348.2,348.2,0,0,0,208.12,430.4a1.86,1.86,0,0,0-1.019-2.588,321.173,321.173,0,0,1-45.868-21.853,1.885,1.885,0,0,1-.185-3.126c3.082-2.309,6.166-4.711,9.109-7.137a1.819,1.819,0,0,1,1.9-.256c96.229,43.917,200.41,43.917,295.5,0a1.812,1.812,0,0,1,1.924.233c2.944,2.426,6.027,4.851,9.132,7.16a1.884,1.884,0,0,1-.162,3.126,301.407,301.407,0,0,1-45.89,21.83,1.875,1.875,0,0,0-1,2.611,391.055,391.055,0,0,0,30.014,48.815,1.864,1.864,0,0,0,2.063.7A486.048,486.048,0,0,0,610.7,405.729a1.882,1.882,0,0,0,.765-1.352C623.729,277.594,590.933,167.465,524.531,69.836ZM222.491,337.58c-28.972,0-52.844-26.587-52.844-59.239S193.056,219.1,222.491,219.1c29.665,0,53.306,26.82,52.843,59.239C275.334,310.993,251.924,337.58,222.491,337.58Zm195.38,0c-28.971,0-52.843-26.587-52.843-59.239S388.437,219.1,417.871,219.1c29.667,0,53.307,26.82,52.844,59.239C470.715,310.993,447.538,337.58,417.871,337.58Z"></path>
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <div class="box box4"></div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <p>© 2024 BhashaBinge. All rights reserved.</p>
+            </div>
+            <div class="col-md-6 text-end">
+                  <p>
+                  Frontend developed with ❤️ by Dedipya Goswami
+                </p> 
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+  </div>
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/TextPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/CSSRulePlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/Draggable.min.js"></script>
+  <script src="/JS/script.js"></script>
+
+</body>
+
+</html>

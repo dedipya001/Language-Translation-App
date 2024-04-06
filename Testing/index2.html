@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lang Translator</title>
+</head>
+<body>
+    <header>
+        <h1>Lang Translator</h1>
+    </header>
+
+    <main>
+        <form id="translationForm">
+            <section id="inputSection">
+                <h2>Input</h2>
+                <div class="languageSelection">
+                    <label for="inputLanguageSelect">Select Input Language</label>
+                    <select id="inputLanguageSelect">
+                        <option value="en">English</option>
+                        <!-- Add more language options as needed -->
+                    </select>
+                </div>
+                <textarea id="inputText" placeholder="Enter Input Text"></textarea>
+            </section>
+
+            <button type="submit">Translate</button>
+        </form>
+
+        <section id="outputSection">
+            <h2>Output</h2>
+            <div class="languageSelection">
+                <label for="outputLanguageSelect">Select Output Language</label>
+                <select id="outputLanguageSelect">
+                    <option value="hindi">Hindi</option>
+                    <option value="english">English</option>
+                    <!-- Add more language options as needed -->
+                </select>
+            </div>
+            <div id="outputText">
+                <!-- Output text will be displayed here -->
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.getElementById("translationForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+        
+            const inputText = document.getElementById("inputText").value;
+            const inputLanguage = document.getElementById("inputLanguageSelect").value;
+            const outputLanguage = document.getElementById("outputLanguageSelect").value;
+        
+            // Check if the input language is English
+            if (inputLanguage.toLowerCase() !== 'en') {
+                console.error('Input language must be English for translation.');
+                return;
+            }
+        
+            const requestBody = {
+                text: inputText,
+                target_language: outputLanguage
+            };
+        
+            try {
+                const response = await fetch("http://localhost:8000/translate/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+        
+                if (!response.ok) {
+                    throw new Error("Translation request failed.");
+                }
+        
+                const translatedText = await response.json();
+                document.getElementById("outputText").textContent = translatedText[0];
+            } catch (error) {
+                console.error("Translation error:", error);
+                document.getElementById("outputText").textContent = "Translation failed.";
+            }
+        });
+        
+
+    </script>
+
+</body>
+</html>
+
+
