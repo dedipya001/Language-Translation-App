@@ -1257,6 +1257,12 @@ footer {
   background-color: transparent;
 } 
 
+
+.para
+{
+  text-align: justify;
+  text-justify: inter-word;
+}
 .footer-links a { 
   color: #fff; 
   text-decoration: none; 
@@ -1268,17 +1274,69 @@ footer {
   color: #adb5bd; 
 } 
 
-.tool{
+.tool {
   padding: 2%;
   position: relative;
   left: 100px;
   bottom: 30px;
 }
 
-.tool p{
-  
-  border : 2px white solid;
+.tool p {
+  border: 2px white solid;
   padding: 1%;
 }
 
+.tooltips {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  
+}
 
+.tooltiptext
+{
+  margin-top: 5% ;
+}
+
+.tooltips .tooltiptext {
+  display: none;
+  width: 130px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 100001;
+  bottom: 10%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+    transition: opacity 0.3s, transform 0.3s; /* Add transition for transform */
+    transform: scale(0); /* Start with a scale of 0 to make it invisible */
+    transform-origin: bottom center; /* Set the origin to the bottom center */
+}
+
+.tooltips a{
+  color: white;
+  text-decoration: none;
+}
+
+.tool:hover .tooltiptext {
+  display: block;
+  opacity: 1;
+  transform: scale(1); /* Scale up to 1 on hover */
+    animation: tooltip-pop 0.5s; /* Add popping animation */
+}
+
+@keyframes tooltip-pop {
+  0% {
+      transform: scale(0.8); /* Start with a slightly smaller scale */
+  }
+  50% {
+      transform: scale(1.1); /* Pop to a slightly larger scale */
+  }
+  100% {
+      transform: scale(1); /* Return to original scale */
+  }
+}

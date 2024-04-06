@@ -286,4 +286,3 @@ function download() {
   window.location.href = 'textfile.txt';
 }
 
-
