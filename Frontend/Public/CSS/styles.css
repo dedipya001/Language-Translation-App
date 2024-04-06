@@ -266,7 +266,10 @@
   color: var(--white-color);
   text-decoration: none;
   display: block;
-  padding: 5px 0;
+  padding-top: 10px;
+  width: max-content;
+  position: relative;
+  left: 56px;
 }
 
 .sub-menu__link:hover {
