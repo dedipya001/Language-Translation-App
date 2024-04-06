@@ -2,6 +2,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.1",
+    "body-parser": "^1.20.2",
     "express": "^4.19.2",
     "flowbite-react": "^0.7.3",
     "mysql": "^2.18.1",

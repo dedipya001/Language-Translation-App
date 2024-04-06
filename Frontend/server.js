@@ -1,13 +1,14 @@
 const express = require("express");
 const mysql = require("mysql");
 const path = require("path");
+const bodyParser = require("body-parser");
+
 const app = express();
 const port = 5007;
 
 // Serve static files from the 'Public' directory
 app.use(express.static(path.join(__dirname,'Public')));
-
-
+app.use(bodyParser.json());
 
 // Connection to MySQL database
 const connection = mysql.createConnection({
@@ -17,38 +18,34 @@ const connection = mysql.createConnection({
   database: 'language_translation'
 });
 
-// Connect to MySQL
-connection.connect(err => {
+connection.connect((err) => {
   if (err) {
-    console.error('Error connecting to database: ', err);
+    console.error('Error connecting to database: ' + err.stack);
     return;
   }
-  console.log('Connected to database');
+  console.log('Connected to database as id ' + connection.threadId);
 });
 
 // Render index.html
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname,'Public', 'index.html'));
+  res.sendFile(path.join(__dirname,'Public', 'index.html'));
 });
 
+// Save ratings to the database
+app.post('/save-ratings', (req, res) => {
+  const { inputLanguage, outputLanguage, rating } = req.body;
 
-// Route to handle saving ratings from users
-app.post('/saveRating', (req, res) => {
-  const { input_language, output_language, rating } = req.body;
-
-  // Insert the rating data into the database
-  const sql = `INSERT INTO language_ratings (input_language, output_language, rating) VALUES (?, ?, ?)`;
-  connection.query(sql, [input_language, output_language, rating], (error, results) => {
-    if (error) {
-      console.error('Error saving rating:', error);
-      res.status(500).json({ error: 'Error saving rating' });
+  const sql = 'INSERT INTO language_ratings (input_language, output_language, rating) VALUES (?, ?, ?)';
+  connection.query(sql, [inputLanguage, outputLanguage, rating], (err, result) => {
+    if (err) {
+      console.error('Error saving rating: ' + err.stack);
+      res.status(500).send('Error saving rating');
       return;
     }
     console.log('Rating saved successfully');
-    res.status(200).json({ message: 'Rating saved successfully' });
+    res.status(200).send('Rating saved successfully');
   });
 });
-
 
 // Start the server
 app.listen(port, () => {
