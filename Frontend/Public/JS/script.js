@@ -181,6 +181,7 @@ document.querySelector(".close-btn").addEventListener("click", function () {
 
 const stars = document.querySelectorAll(".star");
 
+
 stars.forEach((star, index) => {
   star.addEventListener("click", function () {
     const inputLanguageElement = document.getElementById("input-language");
@@ -221,7 +222,96 @@ stars.forEach((star, index) => {
         console.error("There was a problem with your fetch operation:", error);
       });
 
+    
+  });
+});
+
+const stars2 = document.querySelectorAll(".s");
+
+stars2.forEach((star, index) => {
+
+  const inputLanguageElement = document.getElementById("input-language");
+  const inputLanguage = inputLanguageElement.value;
+  const outputLanguageElement = document.getElementById("output-language");
+  const outputLanguage = outputLanguageElement.value;
+  star.addEventListener("click", function () {
+    const ratingValue = 5 - index;
+
+    console.log("Star selected:", index + 1, "Rating:", ratingValue);
+    console.log(
+      "Input Language:",
+      inputLanguage,
+      "Output Language:",
+      outputLanguage
+    );
+    // Send the rating to the server
+    fetch("/save-ratings", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        inputLanguage: inputLanguage, // Replace inputLanguage with your actual value
+        outputLanguage: outputLanguage, // Replace outputLanguage with your actual value
+        rating: ratingValue,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Rating saved successfully:", data);
+      })
+      .catch((error) => {
+        console.error("There was a problem with your fetch operation:", error);
+      });
+  });
+});
+const stars3 = document.querySelectorAll(".st");
+
+stars3.forEach((star, index) => {
+  star.addEventListener("click", function () {
+    const inputLanguageElement = document.getElementById("input-language");
+    const inputLanguage = inputLanguageElement.value;
+    const outputLanguageElement = document.getElementById("output-language");
+    const outputLanguage = outputLanguageElement.value;
+    const ratingValue = 5 - index;
+
+    console.log("Star selected:", index + 1, "Rating:", ratingValue);
     const feedbackPopup = document.querySelector(".popup");
+    console.log(
+      "Input Language:",
+      inputLanguage,
+      "Output Language:",
+      outputLanguage
+    );
+    // Send the rating to the server
+    fetch("/save-ratings", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        inputLanguage: inputLanguage, // Replace inputLanguage with your actual value
+        outputLanguage: outputLanguage, // Replace outputLanguage with your actual value
+        rating: ratingValue,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Rating saved successfully:", data);
+      })
+      .catch((error) => {
+        console.error("There was a problem with your fetch operation:", error);
+      });
     gsap.to(feedbackPopup, {
       autoAlpha: 0,
       duration: 2.1,
@@ -232,15 +322,7 @@ stars.forEach((star, index) => {
   });
 });
 
-const stars2 = document.querySelectorAll(".s");
 
-stars2.forEach((star, index) => {
-  star.addEventListener("click", function () {
-    const ratingValue = 5 - index;
-
-    console.log("Star selected:", index + 1, "Rating:", ratingValue);
-  });
-});
 
 //scrollbar
 

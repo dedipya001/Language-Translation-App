@@ -295,6 +295,7 @@
   width: 100%; /* Adjust the width of the rocket */
   height: 100vh; /* Maintain aspect ratio */
   z-index: 100;
+  opacity: 0.9;
   /* display: none; */
 }
 
@@ -319,6 +320,14 @@
   font-size: 8rem; /* Adjust font size as needed */
   line-height: 1.2;
   z-index: -5;
+}
+
+.India{
+  font-size: 10rem;
+  z-index: 5001;
+  position: relative;
+  top:9px;
+
 }
 
 .line2 {
