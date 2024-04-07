@@ -1,0 +1,1 @@
+translated_text = translate_text_from_pdf(pdf_path)

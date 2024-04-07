@@ -1,19 +1,20 @@
+import fitz  # PyMuPDF
 from transformers import MBartForConditionalGeneration, MBart50TokenizerFast
-import PyPDF2
 import tempfile
 
 # Initialize the MBART model and tokenizer
 model = MBartForConditionalGeneration.from_pretrained("facebook/mbart-large-50-one-to-many-mmt")
 tokenizer = MBart50TokenizerFast.from_pretrained("facebook/mbart-large-50-one-to-many-mmt", src_lang="en_XX")
 
+pdf_path = "../Testing/Normal.pdf"
+
 # Define the function to extract text from a PDF file and translate it
 def translate_text_from_pdf(pdf_path):
-    with open(pdf_path, "rb") as file:
-        reader = PyPDF2.PdfReader(file)
-        text = ""
-        for page_num in range(len(reader.pages)):
-            page = reader.pages[page_num]
-            text += page.extract_text()
+    text = ""
+    with fitz.open(pdf_path) as pdf_document:
+        for page_number in range(len(pdf_document)):
+            page = pdf_document.load_page(page_number)
+            text += page.get_text()
     
     # Translate the extracted text
     translated_text = translate_text(text)
@@ -38,15 +39,14 @@ def translate_batch(text_lines):
     translations = tokenizer.batch_decode(generated_tokens, skip_special_tokens=True)
     return translations
 
-# Define the path to the PDF file
-pdf_path = "C:\\Users\\91983\\OneDrive\\Desktop\\new\\Normal.pdf"
-
 # Translate text from the PDF file
 translated_text = translate_text_from_pdf(pdf_path)
 
-# Write the translated text to a temporary text file
-with tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".txt", encoding="utf-8") as temp_file:
-    temp_file.write(translated_text)
+output_file = "translatedtxt69.txt"
 
-# Inform the user about the temporary file path
-print("Translated text from the PDF has been written to a temporary text file:", temp_file.name)
+# Write the translated text to the specified file
+with open(output_file, "w", encoding="utf-8") as file:
+    file.write(translated_text)
+
+# Inform the user about the file path
+print("Translated text has been written to:", output_file)
