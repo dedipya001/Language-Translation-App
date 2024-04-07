@@ -183,13 +183,21 @@ def translate_batch(text_lines, output_language):
     translations = tokenizer.batch_decode(generated_tokens, skip_special_tokens=True)
     return translations
 
+
+output_directory = os.path.join(os.getcwd(), "Backend", "Translatedtexts")
+os.makedirs(output_directory, exist_ok=True)
+
 # Translate text from the PDF file
 output_language = select_output_language()
 translated_text = translate_text_from_pdf(pdf_path, output_language)
 
-output_file = "translated_text.txt"
+output_file = os.path.join(output_directory, "translated_text.txt")
+
+# Write the translated text to the specified file
 with open(output_file, "w", encoding="utf-8") as file:
     file.write(translated_text)
+
+print("Translated text has been written to:", output_file)
 
 print("Translated text has been written to:", output_file)
 
@@ -232,4 +240,5 @@ else:
         print("Link to download:", response_data["Files"][0]["Url"])
     else:
         print("Failed to convert the text to PDF.")
+
 
