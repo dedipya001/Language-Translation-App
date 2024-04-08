@@ -131,7 +131,7 @@ load_dotenv()
 model = MBartForConditionalGeneration.from_pretrained("facebook/mbart-large-50-one-to-many-mmt")
 tokenizer = MBart50TokenizerFast.from_pretrained("facebook/mbart-large-50-one-to-many-mmt", src_lang="en_XX")
 
-pdf_path = "../Testing/Normal.pdf"
+pdf_path = "../Testing/smalltest.pdf"
 
 language_mapping = {
     "arabic": "ar_AR",
@@ -184,18 +184,26 @@ def translate_batch(text_lines, output_language):
     return translations
 
 
-output_directory = os.path.join(os.getcwd(), "Backend", "Translatedtexts")
-os.makedirs(output_directory, exist_ok=True)
 
 # Translate text from the PDF file
 output_language = select_output_language()
 translated_text = translate_text_from_pdf(pdf_path, output_language)
 
-output_file = os.path.join(output_directory, "translated_text.txt")
 
-# Write the translated text to the specified file
-with open(output_file, "w", encoding="utf-8") as file:
-    file.write(translated_text)
+# output_directory = os.path.join(os.getcwd(), "Backend", "Translatedtexts")
+# os.makedirs(output_directory, exist_ok=True)
+# output_file = os.path.join(output_directory, "translated_text.txt")
+# # Write the translated text to the specified file
+# with open(output_file, "w", encoding="utf-8") as file:
+#     file.write(translated_text)
+
+
+output_directory = os.path.join(os.getcwd(), "Backend", "Translated_Texts")
+os.makedirs(output_directory, exist_ok=True)
+
+# Create a temporary file with a random name in the specified directory
+with tempfile.NamedTemporaryFile(dir=output_directory, delete=False, suffix='.txt') as temp_file:
+    temp_file.write(translated_text.encode())
 
 print("Translated text has been written to:", output_file)
 
