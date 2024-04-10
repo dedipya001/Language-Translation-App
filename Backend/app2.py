@@ -104,6 +104,8 @@
 #     else:
 #         raise ValueError("Failed to convert the text to PDF.")
 
+# 👆upar wala code bhi working hai..bas yaha pe ek extra folder create karke usme translated text store kar rahe hai aur time k nam se banana hoga file name
+
 
 import fitz
 from fastapi import FastAPI
@@ -147,8 +149,8 @@ def translate_text_from_pdf(pdf_path, target_language):
             text += page.get_text()
     
     translated_text = translate_text(text, target_language)
-    # Create a temporary file with a timestamp-based name in the specified directory
     
+    #  temporary file with a time name
     timestamp = time.strftime("%Y-%m-%d-%H-%M-%S")  # Get current timestamp in the specified format
     temp_file_path = os.path.join(output_directory, f"{timestamp}.txt")
     with open(temp_file_path, 'w', encoding='utf-8') as temp_file:

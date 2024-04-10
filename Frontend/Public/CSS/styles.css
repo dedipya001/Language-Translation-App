@@ -91,7 +91,48 @@
     }
   }
   
+  
+  .floating-planet{
+    width: 50px;
+    position: absolute;
+    transition: transform 5s linear; 
+    position: sticky;
+  }
 
+
+  .english
+  {
+    position: relative;
+    top:450px;
+    left: 156px
+
+  }
+
+  .hindi
+  {
+    position: relative;
+    top:250px;
+    left:700px;
+  }
+
+  .bengali{
+
+    position: relative;
+    left: 1200px;
+    top: 300px
+  }
+
+  .telugu{
+    position: relative;
+    left: 800px;
+    top: 550px;
+  }
+
+  .tamil{
+    position: relative;
+    left: 200px;
+    top: 100px;
+  }
 
 .loading-wave {
   width: 300px;
@@ -317,7 +358,7 @@
   transform: translate(-50%, -50%);
   text-align: center;
   color: white;
-  width: 150vh;
+  /* width: 150vh; */
 }
 
 .line1,
@@ -328,6 +369,123 @@
   line-height: 1.2;
   z-index: -5;
 }
+
+/* -------------created new--------------------- */
+
+/* .orbit {
+  z-index: -1000;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 300px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+.planet {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+}
+
+.planet img{
+  width: 70px;
+  height: 70px;
+}
+
+.english {
+  position: relative;
+  top: 100px;
+  left: 200px;
+  animation: orbit-english 15s linear infinite;
+  animation-delay: -5s;
+}
+
+.hindi {
+  position: relative;
+  top: 150px;
+  left: 300px;
+  animation: orbit-hindi 15s linear infinite;
+  animation-delay: -6s;
+}
+
+.bengali {
+  position: relative;
+  top: 200px;
+  left: 250px;
+  animation: orbit-bengali 15s linear infinite;
+  animation-delay: -7s;
+}
+
+.telugu {
+  position: relative;
+  top: 250px;
+  left: 200px;
+  animation: orbit-telugu 15s linear infinite;
+  animation-delay: -8s;
+}
+
+.tamil {
+  position: relative;
+  top: 200px;
+  left: 100px;
+  animation: orbit-tamil 16s linear infinite;
+  animation-delay: -10s;
+}
+
+
+@keyframes orbit-english {
+  from {
+    transform: rotate(0deg) translateX(500px) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(500px) rotate(-360deg);
+  }
+}
+
+@keyframes orbit-hindi {
+  from {
+    transform: rotate(0deg) translateX(400px) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(400px) rotate(-360deg);
+  }
+}
+
+@keyframes orbit-bengali {
+  from {
+    transform: rotate(0deg) translateX(300px) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(300px) rotate(-360deg);
+  }
+}
+
+@keyframes orbit-telugu {
+  from {
+    transform: rotate(0deg) translateX(600px) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(600px) rotate(-360deg);
+  }
+}
+
+@keyframes orbit-tamil {
+  from {
+    transform: rotate(0deg) translateX(700px) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(700px) rotate(-360deg);
+  }
+} */
+ 
+
+/* ------------------------------------*/
+
+
+
 
 .India{
   font-size: 10rem;
@@ -680,6 +838,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 5%;
   
 }
 
