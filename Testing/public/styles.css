@@ -91,48 +91,7 @@
     }
   }
   
-  
-  .floating-planet{
-    width: 50px;
-    position: absolute;
-    transition: transform 5s linear; 
-    position: sticky;
-  }
 
-
-  .english
-  {
-    position: relative;
-    top:450px;
-    left: 156px
-
-  }
-
-  .hindi
-  {
-    position: relative;
-    top:250px;
-    left:700px;
-  }
-
-  .bengali{
-
-    position: relative;
-    left: 1200px;
-    top: 300px
-  }
-
-  .telugu{
-    position: relative;
-    left: 800px;
-    top: 550px;
-  }
-
-  .tamil{
-    position: relative;
-    left: 200px;
-    top: 100px;
-  }
 
 .loading-wave {
   width: 300px;
@@ -356,7 +315,7 @@
   transform: translate(-50%, -50%);
   text-align: center;
   color: white;
-  /* width: 150vh; */
+  width: 150vh;
 }
 
 .line1,
@@ -367,123 +326,6 @@
   line-height: 1.2;
   z-index: -5;
 }
-
-/* -------------created new--------------------- */
-
-/* .orbit {
-  z-index: -1000;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 500px;
-  height: 300px;
-  border-radius: 50%;
-  border: 2px solid #fff;
-}
-
-.planet {
-  position: absolute;
-  width: 50px;
-  height: 50px;
-}
-
-.planet img{
-  width: 70px;
-  height: 70px;
-}
-
-.english {
-  position: relative;
-  top: 100px;
-  left: 200px;
-  animation: orbit-english 15s linear infinite;
-  animation-delay: -5s;
-}
-
-.hindi {
-  position: relative;
-  top: 150px;
-  left: 300px;
-  animation: orbit-hindi 15s linear infinite;
-  animation-delay: -6s;
-}
-
-.bengali {
-  position: relative;
-  top: 200px;
-  left: 250px;
-  animation: orbit-bengali 15s linear infinite;
-  animation-delay: -7s;
-}
-
-.telugu {
-  position: relative;
-  top: 250px;
-  left: 200px;
-  animation: orbit-telugu 15s linear infinite;
-  animation-delay: -8s;
-}
-
-.tamil {
-  position: relative;
-  top: 200px;
-  left: 100px;
-  animation: orbit-tamil 16s linear infinite;
-  animation-delay: -10s;
-}
-
-
-@keyframes orbit-english {
-  from {
-    transform: rotate(0deg) translateX(500px) rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg) translateX(500px) rotate(-360deg);
-  }
-}
-
-@keyframes orbit-hindi {
-  from {
-    transform: rotate(0deg) translateX(400px) rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg) translateX(400px) rotate(-360deg);
-  }
-}
-
-@keyframes orbit-bengali {
-  from {
-    transform: rotate(0deg) translateX(300px) rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg) translateX(300px) rotate(-360deg);
-  }
-}
-
-@keyframes orbit-telugu {
-  from {
-    transform: rotate(0deg) translateX(600px) rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg) translateX(600px) rotate(-360deg);
-  }
-}
-
-@keyframes orbit-tamil {
-  from {
-    transform: rotate(0deg) translateX(700px) rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg) translateX(700px) rotate(-360deg);
-  }
-} */
- 
-
-/* ------------------------------------*/
-
-
-
 
 .India{
   font-size: 10rem;
@@ -557,6 +399,183 @@
 {
   background-color: var(--black-color);
 } */
+
+/* .chatdiv
+{
+  position: fixed;
+  left: 73%;
+  bottom: 0%;
+  width: 400px;
+  height: 400px;
+  top:10%;
+  z-index: -1000000;
+} */
+
+#chat-container {
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  height: 400px;
+  position: fixed;
+  left: 73%;
+  bottom: 15%;
+  border: 2px solid white;
+  overflow: hidden;
+  display: none;
+}
+
+.chat_toggler
+{
+  /* background-color: #a0e8e8; */
+  background-color: #e016bb;
+  position: fixed;
+  left: 94%;
+  bottom: 2%;
+  padding: 1%;
+  border-radius: 50%;
+  opacity: 0.9;
+
+}
+
+.chatcat
+{
+  width: 50px;
+}
+
+#chat-form {
+  position: absolute; /* Change position to absolute */
+  bottom: 0; /* Align to the bottom of the chat container */
+  left: 0; /* Align to the left of the chat container */
+  width: 100%; /* Occupy full width of the chat container */
+  margin-top: 10px; /* Add margin-top for some spacing between chat history and chat form */
+}
+
+/* styles.css */
+#user-input {
+  background-color: #f8f9fa;
+  border: 2px solid #007bff;
+  border-radius: 20px;
+  padding: 10px 15px;
+  font-size: 16px;
+  color: #000;
+  width: 275px;
+  margin-bottom: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin-left: 4%;
+  margin-right: 2%;
+}
+
+.close-png
+{
+  width: 20%;
+    position: relative;
+    left: 39%;
+    top:20%;
+    z-index: 500000;
+}
+#user-input:focus {
+  border-color: #0056b3;
+}
+
+#buttonchat {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#buttonchat:hover {
+  background-color: #0056b3;
+}
+
+
+
+/* h1 {
+  text-align: center;
+  margin-bottom: 20px;
+} */
+
+/* .chat-history {
+  height: 300px;
+  overflow-y: scroll;
+} */
+
+#chat-history {
+  height: calc(100% - 50px); /* Adjust the height to accommodate the chat form */
+  overflow-y: auto; /* Add overflow-y: auto to enable scrollbar when content overflows */
+ display: flex;
+ flex-direction: column;
+ align-items: flex-end;
+  padding-bottom: 10px; /* Add some padding at the bottom to ensure proper scrolling */
+}
+
+.user-message {
+  display: inline-block;
+  text-align: right; /* Align user messages to the right */
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  max-width: 70%; /* Set maximum width to 70% */
+    width: auto; /* Allow minimum width to adjust automatically */
+  /* float: right; Float user messages to the right */
+  clear: both; /* Clear floats to ensure proper alignment */
+  margin-bottom: 4%;
+}
+.bot-message {
+  display: block;
+  text-align: left;
+  padding: 10px;
+  background-color: #0dcaf0;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  clear: both;
+  right: 29%;
+  margin-bottom: 4%;
+  position: relative;
+
+  max-width: 70%; /* Set maximum width to 70% */
+  width: auto; /* Allow minimum width to adjust automatically */
+}
+
+.form {
+  display: flex;
+}
+
+.input {
+  flex-grow: 1;
+  margin-right: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
 
 .transcontainer{
   width: 100%;
@@ -836,7 +855,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 5%;
   
 }
 

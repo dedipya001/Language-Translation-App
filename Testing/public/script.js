@@ -379,42 +379,4 @@ function download() {
 }
 
 
-document.addEventListener("DOMContentLoaded", function() {
-  const floatingPlanets = document.querySelectorAll('.floating-planet');
-  const minGap = 200; // Minimum gap between planets
-
-  const planetPositions = [];
-
-  floatingPlanets.forEach(function(planet) {
-      let randomX, randomY;
-      do {
-          randomX = Math.random() * (window.innerWidth - planet.offsetWidth);
-          randomY = Math.random() * (window.innerHeight - planet.offsetHeight);
-      } while (hasCollision(randomX, randomY));
-  });
-
-  function hasCollision(x, y) {
-      for (let i = 0; i < planetPositions.length; i++) {
-          const position = planetPositions[i];
-          const distance = Math.sqrt(Math.pow(x - position.x, 2) + Math.pow(y - position.y, 2));
-          if (distance < minGap) {
-              return true; // Collision detected
-          }
-      }
-      return false; // No collision
-  }
-
-  floatingPlanets.forEach(function(planet) {
-      // Random rotation speed between 1 and 3 rotations per second
-      const rotationSpeed = (Math.random() * 2 + 1) * 20;
-
-      // Use GSAP to rotate the planet horizontally indefinitely
-      gsap.to(planet, {
-          // rotationZ: 360,
-          duration: rotationSpeed,
-          repeat: -1,
-          ease: "none",
-      });
-  });
-});
-
+//lets see the code

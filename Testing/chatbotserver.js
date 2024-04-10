@@ -1,63 +1,15 @@
-const express = require("express");
-const mysql = require("mysql");
-const path = require("path");
-const bodyParser = require("body-parser");
+// node --version # Should be >= 18
+// npm install @google/generative-ai express
+
+const express = require('express');
 const { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } = require('@google/generative-ai');
 const dotenv = require('dotenv').config()
 
-
-
-// Load environment variables from .env file
-// dotenv.config();
-
 const app = express();
-const port = process.env.PORT || 5007;
-const MODEL_NAME = "gemini-1.0-pro";
-// const API_KEY = "AIzaSyD0uowFJPmpV9Ni4rvQV4Jjy0nzfKhlD-c" ;
-const API_KEY = process.env.API_KEY;
-// Serve static files from the 'Public' directory
-app.use(express.static(path.join(__dirname, 'Public')));
-app.use(bodyParser.json());
+const port = process.env.PORT || 3000;
 app.use(express.json());
-
-// Connection to MySQL database
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'Dedipya03',
-  database: 'language_translation'
-});
-
-connection.connect((err) => {
-  if (err) {
-    console.error('Error connecting to database: ' + err.stack);
-    return;
-  }
-  console.log('Connected to database as id ' + connection.threadId);
-});
-
-// Render index.html
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'Public', 'index.html'));
-});
-
-// Save ratings to the database
-app.post('/save-ratings', (req, res) => {
-  const { inputLanguage, outputLanguage, rating } = req.body;
-
-  const sql = 'INSERT INTO language_ratings (input_language, output_language, rating) VALUES (?, ?, ?)';
-  connection.query(sql, [inputLanguage, outputLanguage, rating], (err, result) => {
-    if (err) {
-      console.error('Error saving rating: ' + err.stack);
-      res.status(500).send('Error saving rating');
-      return;
-    }
-    console.log('Rating saved successfully');
-    res.status(200).send('Rating saved successfully');
-  });
-});
-
-// Chatbot
+const MODEL_NAME = "gemini-1.0-pro";
+const API_KEY = process.env.API_KEY;
 
 async function runChat(userInput) {
   const genAI = new GoogleGenerativeAI(API_KEY);
@@ -126,6 +78,13 @@ async function runChat(userInput) {
   return response.text();
 }
 
+app.use(express.static('public'));
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index2.html');
+});
+// app.get('/loader.gif', (req, res) => {
+//   res.sendFile(__dirname + '/loader.gif');
+// });
 app.post('/chat', async (req, res) => {
   try {
     const userInput = req.body?.userInput;
@@ -141,8 +100,7 @@ app.post('/chat', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-// Start the server
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
 
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});
