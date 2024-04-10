@@ -467,8 +467,18 @@ body {
 /* ------------------------------------*/
 
 .India {
+  /* with blue gradients
+
   /* background: linear-gradient(135deg, orange 26%, #FFFFFF 40%, blue 50%, green 66%); */
-  background: linear-gradient(135deg, orange 26%, #FFFFFF 42%, blue 54%, green 66%);
+  /* background: linear-gradient(135deg, orange 26%, #FFFFFF 42%, blue 54%, green 66%);
+   */
+
+   /* background: linear-gradient(180deg, orange 26%, #FFFFFF 42%, blue 54%, #FFFFFF 20%, green 66%);
+   
+   */
+
+   background: linear-gradient(180deg, orange 29%, #FFFFFF 46%, green 66%);  /* without blue */
+
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
