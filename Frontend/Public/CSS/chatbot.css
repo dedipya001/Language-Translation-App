@@ -10,6 +10,7 @@
 } */
 
 #chat-container {
+  z-index: 500000;
   background-color: transparent;
   border-radius: 10px;
   padding: 20px;
@@ -22,12 +23,12 @@
   border: 2px solid white;
   overflow: hidden;
   display: none;
-  animation: slideIn 0.3s ease forwards; /* Animation on initial display */
+  animation: slideIn 1s ease forwards; /* Animation on initial display */
 }
 
 .chat-container.show {
   display: block;
-  animation: slideOut 0.3s ease forwards; /* Animation on toggling */
+  animation: slideOut 1s ease forwards; /* Animation on toggling */
 }
 
 @keyframes slideIn {
@@ -63,8 +64,15 @@
     padding: 1%;
     border-radius: 50%;
     opacity: 0.9;
-  
+    z-index: 500000;
   }
+
+  .chat_toggler:hover
+  {
+    cursor: pointer;
+  }
+
+
   
   .chatcat
   {
@@ -104,7 +112,7 @@
       position: relative;
       left: 39%;
       top:20%;
-      z-index: 500000;
+      
   }
   #user-input:focus {
     border-color: #0056b3;
@@ -153,7 +161,7 @@
   
   .user-message {
     display: inline-block;
-    text-align: right; 
+    text-align: left; 
     padding: 10px;
     background-color: #f0f0f0;
     border-radius: 10px;
