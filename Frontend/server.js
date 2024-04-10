@@ -13,7 +13,6 @@ const dotenv = require('dotenv').config()
 const app = express();
 const port = process.env.PORT || 5007;
 const MODEL_NAME = "gemini-1.0-pro";
-// const API_KEY = "AIzaSyD0uowFJPmpV9Ni4rvQV4Jjy0nzfKhlD-c" ;
 const API_KEY = process.env.API_KEY;
 // Serve static files from the 'Public' directory
 app.use(express.static(path.join(__dirname, 'Public')));
