@@ -18,7 +18,8 @@ chatur.addEventListener('click', () => {
 
 
 async function sendMessage() {
-  const userMessage = userInput.value;
+  const userMessage = userInput.value.trim();
+  if (!userMessage) return;
   userInput.value = ''; // Clear input field
   console.log(userMessage)
   chatHistory.innerHTML += `<div class="user-message">${userMessage}</div>`;
