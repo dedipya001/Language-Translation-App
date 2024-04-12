@@ -108,7 +108,7 @@
 
 
 import fitz
-from fastapi import FastAPI
+from fastapi import FastAPI, File, UploadFile
 from schemas2 import TranslationRequest, TranslationResponse, DownloadPDFResponse
 from transformers import MBartForConditionalGeneration, MBart50TokenizerFast
 import requests
@@ -124,7 +124,9 @@ load_dotenv()
 model = MBartForConditionalGeneration.from_pretrained("facebook/mbart-large-50-one-to-many-mmt")
 tokenizer = MBart50TokenizerFast.from_pretrained("facebook/mbart-large-50-one-to-many-mmt", src_lang="en_XX")
 
-pdf_path = "../Testing/smalltest.pdf"
+pdf_directory = "../Testing/"
+output_directory = os.path.join(os.path.dirname(os.getcwd()), "Translated_Texts")
+os.makedirs(output_directory, exist_ok=True)
 
 language_mapping = {
     "arabic": "ar_AR",
@@ -138,36 +140,36 @@ language_mapping = {
     "telugu": "te_IN"
 }
 
-output_directory = os.path.join(os.path.dirname(os.getcwd()), "Translated_Texts")
-os.makedirs(output_directory, exist_ok=True)
+temp_pdf_path = None
 
-def translate_text_from_pdf(pdf_path, target_language):
+@app.post("/upload")
+async def upload_file(file: UploadFile = File(...)):
+    global temp_pdf_path
+    filename = file.filename
+    temp_pdf_path = os.path.join(pdf_directory, filename)
+    with open(temp_pdf_path, "wb") as temp_pdf:
+        temp_pdf.write(await file.read())
+    print("Uploaded PDF file saved to:", temp_pdf_path)
+    return {"message": "File uploaded successfully"}
+
+def translate_text_from_pdf(temp_pdf_path, target_language):
     text = ""
-    with fitz.open(pdf_path) as pdf_document:
+    with fitz.open(temp_pdf_path) as pdf_document:
         for page_number in range(len(pdf_document)):
             page = pdf_document.load_page(page_number)
             text += page.get_text()
-    
     translated_text = translate_text(text, target_language)
-    
-    #  temporary file with a time name
-    timestamp = time.strftime("%Y-%m-%d-%H-%M-%S")  # Get current timestamp in the specified format
+    timestamp = time.strftime("%Y-%m-%d-%H-%M-%S")
     temp_file_path = os.path.join(output_directory, f"{timestamp}.txt")
     with open(temp_file_path, 'w', encoding='utf-8') as temp_file:
         temp_file.write(translated_text)
-    
     print("Translated text has been written to:", temp_file_path)
-    
-    
     return translated_text
-
-
 
 def translate_text(text, target_language):
     target_language_code = language_mapping.get(target_language.lower())
     if not target_language_code:
         raise ValueError(f"Unsupported target language: {target_language}")
-    
     text_lines = text.splitlines()
     batch_size = 10
     translated_lines = []
@@ -186,17 +188,14 @@ def translate_batch(text_lines, target_language_code):
 
 @app.post("/translate", response_model=TranslationResponse)
 async def translate_pdf(request: TranslationRequest):
-    translated_text = translate_text_from_pdf(pdf_path, request.language)
+    translated_text = translate_text_from_pdf(temp_pdf_path, request.language)
     return TranslationResponse(translated_text=translated_text)
 
 @app.get("/download_pdf/{target_language}", response_model=DownloadPDFResponse)
 async def download_pdf(target_language: str):
-    translated_text = translate_text_from_pdf(pdf_path, target_language)
-    
+    translated_text = translate_text_from_pdf(temp_pdf_path, target_language)
     base64_content = base64.b64encode(translated_text.encode()).decode()
-    
     api_endpoint = "https://v2.convertapi.com/convert/txt/to/pdf"
-    
     payload = {
         "Parameters": [
             {
@@ -216,11 +215,9 @@ async def download_pdf(target_language: str):
             }
         ]
     }
-    
     convertapi_secret = os.getenv("CONVERTAPI_SECRET")
     if not convertapi_secret:
         raise ValueError("CONVERTAPI_SECRET environment variable is not set.")
-    
     response = requests.post(f"{api_endpoint}?Secret={convertapi_secret}", json=payload)
     if response.status_code == 200:
         response_data = response.json()
@@ -228,5 +225,4 @@ async def download_pdf(target_language: str):
         return DownloadPDFResponse(download_link=download_link)
     else:
         raise ValueError("Failed to convert the text to PDF.")
-
 
