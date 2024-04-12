@@ -1116,7 +1116,7 @@ h2 {
 /* Hide scrollbar for Firefox */
 * {
   scrollbar-width: thin;
-  /* scrollbar-color: transparent transparent;  */
+  scrollbar-color: transparent transparent; 
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -1184,6 +1184,68 @@ h2 {
   background-color: black;
   opacity: 0.7;
 }
+
+
+
+
+.contact-form {
+  background-color: transparent;
+  position: relative;
+    left: 40%;
+}
+
+.contact-form h5 {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.contact-form form {
+  max-width: auto;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.btn-submit {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-submit:hover {
+  background-color: #0056b3;
+}
+
+
+
+
+
 
 .card {
   position: relative;
@@ -1427,7 +1489,7 @@ footer {
 .tool {
   padding: 2%;
   position: relative;
-  left: 100px;
+  left: -50px;
   bottom: 30px;
 }
 

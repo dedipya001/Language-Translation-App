@@ -8,6 +8,8 @@ const form = document.getElementById('chat-form');
 const chatur = document.getElementById('chatur');
 const chatcontainer = document.getElementById('chat-container');
 
+
+
 chatur.addEventListener('click', () => {
   if (chatcontainer.style.display === 'none' || chatcontainer.style.display === '') {
     chatcontainer.style.display = "block";
@@ -22,7 +24,28 @@ async function sendMessage() {
   if (!userMessage) return;
   userInput.value = ''; // Clear input field
   console.log(userMessage)
+
+  // const loader = document.querySelector('.botloader');
+  // const loader = document.createElement('div');
+
+
   chatHistory.innerHTML += `<div class="user-message">${userMessage}</div>`;
+  chatHistory.scrollTop = chatHistory.scrollHeight;
+  
+
+  const loader = document.createElement('div');
+  loader.classList.add("botloader");
+  loader.innerHTML += `
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+`;
+chatHistory.appendChild(loader);
+chatHistory.scrollTop = chatHistory.scrollHeight;
+
+  // loader.style.display = 'flex';
   try {
     const response = await fetch('/chat', {
       method: 'POST',
@@ -37,22 +60,27 @@ async function sendMessage() {
     const botMessage = data.response;
     console.log(botMessage)
     // Add chat message to the chat history
+
+    // loader.style.display="none";
+    loader.remove();
+
     chatHistory.innerHTML += `<div class="bot-message">${botMessage}</div>`;
 
     
     chatHistory.scrollTop = chatHistory.scrollHeight;
   } catch (error) {
     console.error('Error:', error);
-    
+    // loader.style.display="none";
+    loader.remove();
   }
 }
 
 form.addEventListener('submit', (event) => {
   event.preventDefault(); // Prevent form submission
-  // const loader = document.getElementById('loader');
-  // loader.style.display = 'block'; // Show the loader
+  // const loader = document.getElementById('botloader');
+  // loader.style.display = 'flex'; // Show the loader
   sendMessage().finally(() => {
-    // loader.style.display = 'none'; // Hide the loader
+  // loader.style.display = 'none'; // Hide the loader
   });;
 });
 
