@@ -9,3 +9,7 @@ class TranslationResponse(BaseModel):
 
 class DownloadPDFResponse(BaseModel):
     download_link: str
+
+class UploadForm(BaseModel):
+    output_language: str
+    file: bytes

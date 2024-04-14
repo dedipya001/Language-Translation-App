@@ -109,16 +109,27 @@
 
 import fitz
 from fastapi import FastAPI, File, UploadFile
-from schemas2 import TranslationRequest, TranslationResponse, DownloadPDFResponse
+from schemas2 import TranslationRequest, TranslationResponse, DownloadPDFResponse, UploadForm
 from transformers import MBartForConditionalGeneration, MBart50TokenizerFast
 import requests
 import base64
 import os
 from dotenv import load_dotenv
 import time
+from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
+
+
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
+    allow_headers=["*"],
+)
 load_dotenv()
 
 model = MBartForConditionalGeneration.from_pretrained("facebook/mbart-large-50-one-to-many-mmt")
@@ -143,7 +154,9 @@ language_mapping = {
 temp_pdf_path = None
 
 @app.post("/upload")
-async def upload_file(file: UploadFile = File(...)):
+async def upload_file(form_data: UploadForm):
+    uploaded_file = form_data.file
+    output_language = form_data.output_language
     global temp_pdf_path
     filename = file.filename
     temp_pdf_path = os.path.join(pdf_directory, filename)

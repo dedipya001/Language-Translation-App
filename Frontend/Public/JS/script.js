@@ -107,8 +107,7 @@ function smoothScroll(target) {
 }
 
 //Translation
-document
-  .getElementById("transcontainer")
+document.getElementById("transcontainer")
   .addEventListener("submit", async function (event) {
     event.preventDefault();
 
