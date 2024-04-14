@@ -127,7 +127,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE"],
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 load_dotenv()
@@ -154,9 +154,9 @@ language_mapping = {
 temp_pdf_path = None
 
 @app.post("/upload")
-async def upload_file(form_data: UploadForm):
-    uploaded_file = form_data.file
-    output_language = form_data.output_language
+async def upload_file(file: UploadFile = File(...)):
+    # uploaded_file = form_data.file
+    # output_language = form_data.output_language
     global temp_pdf_path
     filename = file.filename
     temp_pdf_path = os.path.join(pdf_directory, filename)
@@ -170,7 +170,7 @@ def translate_text_from_pdf(temp_pdf_path, target_language):
     with fitz.open(temp_pdf_path) as pdf_document:
         for page_number in range(len(pdf_document)):
             page = pdf_document.load_page(page_number)
-            text += page.get_text()
+            text += page.get_text(encoding='utf8')
     translated_text = translate_text(text, target_language)
     timestamp = time.strftime("%Y-%m-%d-%H-%M-%S")
     temp_file_path = os.path.join(output_directory, f"{timestamp}.txt")
