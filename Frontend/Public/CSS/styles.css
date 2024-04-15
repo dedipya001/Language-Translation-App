@@ -791,6 +791,8 @@ body {
 .input1 {
   width: 300px; /* Fixed width */
   height: 40px; /* Fixed height */
+  display: block;
+  margin-top: 1%;
   border-radius: 5px;
   border: 2px solid var(--main-color);
   background-color: rgb(194, 194, 194);
@@ -852,7 +854,10 @@ body {
   cursor: pointer;
 }
 
+.button-confirm:hover {
+  transform: translateY(-2px); 
 
+}
 
 
 
@@ -1298,7 +1303,7 @@ h2 {
   color: #fff;
 }
 
-/* Define animation for twinkling effect */
+/* animation for twinkling effect */
 @keyframes stars {
   0% {
     background-position: 0 0;
@@ -1452,10 +1457,57 @@ h2 {
     "Lucida Sans", Arial, sans-serif;
 }
 
+#upload-message{
+  color: #fff;
+  margin-bottom: 10%;
+  font-size: 1.9rem;
+}
+
+#successfulmsg{
+  font-size: 1.5rem;
+  color: #FFFFFF;
+  margin-bottom: 10%;
+  margin-top: 5%;
+}
+
+#translate-pdf{
+  width: 120px;
+    height: 40px;
+    border-radius: 5px;
+    border: 2px solid var(--black-color);
+    color: rgb(250, 247, 249);
+    box-shadow: 4px 4px var(--main-color);
+    font-size: 17px;
+    font-weight: 600;
+    background: var(--main-color);
+    cursor: pointer;
+    margin-bottom: 20%;
+    display: none;
+}
+
+#translate-pdf:hover{
+  transform: translateY(-2px); 
+}
+
+.preview-container{
+  display: none;
+}
+
+
+.file-name-display
+{
+  display: block;
+  position: relative;
+  /* bottom: 190px; */
+  color: antiquewhite;
+  border: 2px solid white;
+  padding: 20px;
+}
+
 .api-response-container {
   height: 200px;
   width: 300px;
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   align-items: space-between;
   gap: 20px;
@@ -1469,6 +1521,7 @@ h2 {
   box-shadow: 0px 48px 35px -48px #e8e8e8;
   transition: all 0.3s;
   margin-top: 10%;
+  margin-left: 7%;
   display: none;
 }
 
