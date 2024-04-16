@@ -1,5 +1,10 @@
 // const { getEnabledCategories } = require("trace_events");
 
+
+
+
+
+
 const chatHistory = document.getElementById('chat-history');
 const userInput = document.getElementById('user-input');
 const form = document.getElementById('chat-form');
