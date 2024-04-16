@@ -174,3 +174,80 @@ document.addEventListener('DOMContentLoaded', () => {
         translatePdfButton.style.display = 'block';
     });
 });
+
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     const translatePdfButton = document.getElementById('translate-pdf');
+
+//     translatePdfButton.addEventListener('click', async () => {
+//         const targetLanguage = document.getElementById('output-language2').value;
+
+//         try {
+//             const response = await fetch(`http://localhost:8000/download_pdf/${targetLanguage}`);
+//             if (response.ok) {
+//                 const data = await response.json();
+//                 // Handle successful response, e.g., display download link
+//                 console.log('Download link:', data.download_link);
+//                 // You can redirect to the download link or display it as per your requirement
+//             } else {
+//                 console.error('Error:', response.statusText);
+//                 // Handle error response
+//             }
+//         } catch (error) {
+//             console.error('Network error:', error);
+//             // Handle network error
+//         }
+//     });
+// });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const translatePdfButton = document.getElementById('translate-pdf');
+    const loader = document.getElementById('trans-loader');
+    const downloadbutton = document.getElementById('downloadbutton');
+    const uploadmessage = document.getElementById("successfulmsg");
+    
+    translatePdfButton.addEventListener('click', async () => {
+        // Show loader
+        // successfulMsg.innerHTML = '<span></span>';
+        loader.style.display = 'block';
+        translatePdfButton.style.display = 'none';
+
+        // var downloadLink = data.download_link;
+        const targetLanguage = document.getElementById('output-language2').value;
+
+        try {
+            const response = await fetch(`http://localhost:8000/download_pdf/${targetLanguage}`);
+            if (response.ok) {
+                const data = await response.json();
+
+                var downloadLink = data.download_link;
+                var downloadButton = document.getElementById('button-download');
+
+                
+                // Handle successful response, e.g., display download link
+                console.log('Download link:', data.download_link);
+                downloadButton.onclick = function() {
+                    window.location.href = downloadLink;
+                };
+
+                // You can redirect to the download link or display it as per your requirement
+                uploadmessage.innerHTML = '<span> Click on Download button to Download your file </span>'
+                downloadbutton.style.display = 'block';
+                // Hide loader
+                loader.style.display = 'none';
+            } else {
+                console.error('Error:', response.statusText);
+                // Handle error response
+                // Hide loader
+                loader.style.display = 'none';
+            }
+        } catch (error) {
+            console.error('Network error:', error);
+            // Handle network error
+            // Hide loader
+            loader.style.display = 'none';
+        }
+    });
+});
+

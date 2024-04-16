@@ -170,7 +170,7 @@ def translate_text_from_pdf(temp_pdf_path, target_language):
     with fitz.open(temp_pdf_path) as pdf_document:
         for page_number in range(len(pdf_document)):
             page = pdf_document.load_page(page_number)
-            text += page.get_text(encoding='utf8')
+            text += page.get_text()
     translated_text = translate_text(text, target_language)
     timestamp = time.strftime("%Y-%m-%d-%H-%M-%S")
     temp_file_path = os.path.join(output_directory, f"{timestamp}.txt")
@@ -238,4 +238,5 @@ async def download_pdf(target_language: str):
         return DownloadPDFResponse(download_link=download_link)
     else:
         raise ValueError("Failed to convert the text to PDF.")
+
 
