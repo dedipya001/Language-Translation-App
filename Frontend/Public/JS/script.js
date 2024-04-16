@@ -107,8 +107,7 @@ function smoothScroll(target) {
 }
 
 //Translation
-document
-  .getElementById("transcontainer")
+document.getElementById("transcontainer")
   .addEventListener("submit", async function (event) {
     event.preventDefault();
 
@@ -364,13 +363,13 @@ checkbox.addEventListener("change", function () {
   }
 });
 
-const apiresponse = document.getElementById("api-response-container");
-const apibutton = document.getElementById("button-submit");
-const downloadbutton = document.getElementById("downloadbutton");
-apibutton.addEventListener("click", function () {
-  apiresponse.style.display = "block";
-  downloadbutton.style.display = "flex";
-});
+// const apiresponse = document.getElementById("api-response-container");
+// const apibutton = document.getElementById("button-submit");
+// const downloadbutton = document.getElementById("downloadbutton");
+// apibutton.addEventListener("click", function () {
+//   apiresponse.style.display = "flex";
+//   downloadbutton.style.display = "flex";
+// });
 
 function download() {
   // Assuming 'textfile.txt' is the file you want to download

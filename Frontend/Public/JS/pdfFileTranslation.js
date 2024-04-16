@@ -1,83 +1,253 @@
+// // document.addEventListener('DOMContentLoaded', () => {
+// //     const form = document.getElementById('translation-form');
+// //     const button = document.getElementById('button-submit');
 
+// //     form.addEventListener('submit', async (event) => {
+// //         event.preventDefault();
 
+// //         const form = new FormData();
+// //         form.append('file', fileInputElement.files[0]);  // Assuming fileInputElement is the file input element
+// //         form.append('output_language', selectedLanguage);  // Assuming selectedLanguage is the selected output language
+        
+// //         fetch('http://localhost:8000/upload/', {
+// //             method: 'POST',
+// //             body: form
+// //         })
+// //         .then(response => response.json())
+// //         .then(data => console.log(data))
+// //         .catch(error => console.error('Error:', error))
+// //     })
 
+// // });
 
+// document.addEventListener('DOMContentLoaded', () => {
+//     const form = document.getElementById('translation-form');
+//     const button = document.getElementById('button-submit');
 
+//     form.addEventListener('submit', async (event) => {
+//         event.preventDefault(); // Prevent default form submission behavior
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// document.addEventListener("DOMContentLoaded", function() {
-//     const fileInput = document.getElementById("file");
-//     const outputLanguageSelect = document.getElementById("output-language2");
-//     const submitButton = document.getElementById("button-submit");
-//     const previewContainer = document.getElementById("preview");
-//     const apiResponseContainer = document.getElementById("api-response");
-//     const downloadButton = document.getElementById("button-download");
-
-//     submitButton.addEventListener("click", async function() {
-//         const file = fileInput.files[0];
-//         const outputLanguage = outputLanguageSelect.value;
-
-//         if (!file) {
-//             alert("Please select a file.");
-//             return;
-//         }
-
-//         const formData = new FormData();
-//         formData.append("file", file);
-//         formData.append("language", outputLanguage);
-
+//         const formData = new FormData(form);
+//         const responseContainer = document.getElementById('api-response');
+//         const uploadMessage = document.getElementById('upload-message');
+//         const translatePdf = document.getElementById('translate-pdf');
+//         const successfulmsg = document.getElementById('successfulmsg');
 //         try {
-//             const response = await fetch("/translate", {
-//                 method: "POST",
-//                 body: formData
+//             const response = await fetch('http://localhost:8000/upload', {
+//                 method: 'POST',
+//                 body: formData,
 //             });
 
-//             if (!response.ok) {
-//                 throw new Error("Translation failed.");
+//             if (response.ok) {
+//                 const data = await response.json();
+//                 successfulmsg.innerHTML = `<span>File Uploaded Successfully</span>`;
+//                 uploadMessage.style.display = 'none';
+//                 translatePdf.style.display = 'block';
+//             } else {
+//                 uploadMessage.innerHTML = '<span>Error uploading file</span>';
 //             }
-
-//             const data = await response.json();
-//             previewContainer.innerHTML = `<p>${data.translated_text}</p>`;
-//             apiResponseContainer.innerText = "Translation Successful!";
-//             downloadButton.style.display = "block";
 //         } catch (error) {
-//             console.error("Error:", error);
-//             apiResponseContainer.innerText = "Translation Failed!";
+//             console.error('Error:', error);
+//             uploadMessage.innerHTML = '<span>Error uploading file</span>';
+//         }
+//     });
+// });
+
+//----------------------------------------------------------------------------------------------
+// document.addEventListener('DOMContentLoaded', () => {
+//     const form = document.getElementById('translation-form');
+//     const buttonSubmit = document.getElementById('button-submit');
+//     const translatePdfButton = document.getElementById('translate-pdf');
+//     const previewContainer = document.querySelector('.preview-container');
+//     const previewText = document.querySelector('.preview span');
+//     const fileInput = document.getElementById('file');
+//     const fileUpload = document.getElementById('custum-file-upload');
+    
+//     fileInput.addEventListener('change', () => {
+//         const file = fileInput.files[0];
+//         if (file) {
+//             previewText.textContent = `Preview of ${file.name}:`;
+//             const reader = new FileReader();
+//             reader.onload = (event) => {
+//                 const preview = document.createElement('embed');
+//                 preview.setAttribute('src', event.target.result);
+//                 preview.setAttribute('type', 'application/pdf');
+//                 previewContainer.innerHTML = ''; // Clear previous preview
+//                 previewContainer.appendChild(preview);
+//             };
+//             reader.readAsDataURL(file);
+//         } else {
+//             previewText.textContent = 'The preview of the uploaded file will appear here:';
+//             previewContainer.innerHTML = '';
 //         }
 //     });
 
-//     downloadButton.addEventListener("click", async function() {
-//         // Implement download functionality if needed
+//     form.addEventListener('submit', async (event) => {
+//         event.preventDefault(); // Prevent default form submission behavior
+        
+//         // Your form submission logic here
+//         event.preventDefault(); // Prevent default form submission behavior
+        
+//         const formData = new FormData(form); // Get form data
+        
+//         try {
+//             const response = await fetch('http://localhost:8000/upload', {
+//                 method: 'POST',
+//                 body: formData,
+//                 // Add headers if needed
+//             });
+            
+//             if (response.ok) {
+//                 const data = await response.json();
+//                 // Handle successful response
+//                 $('#successfulmsg').html('<span>File Uploaded Successfully</span>');
+//             } else {
+//                 // Handle error response
+//                 $('#upload-message').html('<span>Error uploading file</span>');
+//             }
+//         } catch (error) {
+//             // Handle network error
+//             console.error('Network error:', error);
+//             $('#upload-message').html('<span>Error uploading file</span>');
+//         }
+        
+//         // Change submit button to translate button
+//         fileUpload.style.display = 'none';
+//         buttonSubmit.style.display = 'none';
+//         translatePdfButton.style.display = 'block';
 //     });
 // });
+
+
+//================================================================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('translation-form');
+    const buttonSubmit = document.getElementById('button-submit');
+    const translatePdfButton = document.getElementById('translate-pdf');
+    const uploadMessage = document.getElementById('upload-message');
+    const successfulMsg = document.getElementById('successfulmsg');
+    const fileInput = document.getElementById('file');
+    const fileNameDisplay = document.getElementById('file-name-display');
+    const fileUpload = document.getElementById('custum-file-upload');
+    
+    
+    fileInput.addEventListener('change', () => {
+        const file = fileInput.files[0];
+        if (file) {
+            fileNameDisplay.textContent = file.name;
+            uploadMessage.style.display = 'none'; // Hide upload message
+            fileNameDisplay.style.display = 'block'; // Show file name display box
+        } else {
+            fileNameDisplay.textContent = ''; // Clear file name display
+            fileNameDisplay.style.display = 'none'; // Hide file name display box
+            uploadMessage.style.display = 'block'; // Show upload message
+        }
+    });
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault(); // Prevent default form submission behavior
+        
+        const formData = new FormData(form); // Get form data
+        
+        try {
+            const response = await fetch('http://localhost:8000/upload', {
+                method: 'POST',
+                body: formData,
+                // Add headers if needed
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                successfulMsg.innerHTML = '<span>File Uploaded Successfully</span>';
+            } else {
+                uploadMessage.innerHTML = '<span>Error uploading file</span>';
+            }
+        } catch (error) {
+            console.error('Network error:', error);
+            uploadMessage.innerHTML = '<span>Error uploading file</span>';
+        }
+        
+        // Change submit button to translate button
+        fileUpload.style.display = 'none';
+        buttonSubmit.style.display = 'none';
+        translatePdfButton.style.display = 'block';
+    });
+});
+
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     const translatePdfButton = document.getElementById('translate-pdf');
+
+//     translatePdfButton.addEventListener('click', async () => {
+//         const targetLanguage = document.getElementById('output-language2').value;
+
+//         try {
+//             const response = await fetch(`http://localhost:8000/download_pdf/${targetLanguage}`);
+//             if (response.ok) {
+//                 const data = await response.json();
+//                 // Handle successful response, e.g., display download link
+//                 console.log('Download link:', data.download_link);
+//                 // You can redirect to the download link or display it as per your requirement
+//             } else {
+//                 console.error('Error:', response.statusText);
+//                 // Handle error response
+//             }
+//         } catch (error) {
+//             console.error('Network error:', error);
+//             // Handle network error
+//         }
+//     });
+// });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const translatePdfButton = document.getElementById('translate-pdf');
+    const loader = document.getElementById('trans-loader');
+    const downloadbutton = document.getElementById('downloadbutton');
+    const uploadmessage = document.getElementById("successfulmsg");
+    
+    translatePdfButton.addEventListener('click', async () => {
+        // Show loader
+        // successfulMsg.innerHTML = '<span></span>';
+        loader.style.display = 'block';
+        translatePdfButton.style.display = 'none';
+
+        // var downloadLink = data.download_link;
+        const targetLanguage = document.getElementById('output-language2').value;
+
+        try {
+            const response = await fetch(`http://localhost:8000/download_pdf/${targetLanguage}`);
+            if (response.ok) {
+                const data = await response.json();
+
+                var downloadLink = data.download_link;
+                var downloadButton = document.getElementById('button-download');
+
+                
+                // Handle successful response, e.g., display download link
+                console.log('Download link:', data.download_link);
+                downloadButton.onclick = function() {
+                    window.location.href = downloadLink;
+                };
+
+                // You can redirect to the download link or display it as per your requirement
+                uploadmessage.innerHTML = '<span> Click on Download button to Download your file </span>'
+                downloadbutton.style.display = 'block';
+                // Hide loader
+                loader.style.display = 'none';
+            } else {
+                console.error('Error:', response.statusText);
+                // Handle error response
+                // Hide loader
+                loader.style.display = 'none';
+            }
+        } catch (error) {
+            console.error('Network error:', error);
+            // Handle network error
+            // Hide loader
+            loader.style.display = 'none';
+        }
+    });
+});
+

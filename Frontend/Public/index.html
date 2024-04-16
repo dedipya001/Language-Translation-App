@@ -4,13 +4,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BhashaBinge</title>
+  <title>Linguist : The only language translator in the Linguistic Universe</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400..800&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/CSS/styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>  <link rel="stylesheet" href="/CSS/styles.css" />
   <link rel="stylesheet" href="/CSS/chatbot.css" />
   <link rel="stylesheet" href="/CSS/cursor.css" />
 
@@ -200,7 +201,7 @@
 
 
         <div class="textfiletranslation">
-          <h2>Want to try Text File Translation.</h2>
+          <h2>Want to try PDF File Translation.</h2>
           <!-- <div class="input-container">
             <label for="input-language"><span class="langtext">Input Language:</span></label>
             <select id="input-language2" class="input1">
@@ -212,9 +213,9 @@
             </select>
           </div> -->
           <div class="output-container">
-            <form id="translation-form">
+            <form id="translation-form" enctype="multipart/form-data">
               <label for="output-language" class="output-language"><span class="langtext">Output Language:</span></label>
-              <select id="output-language2" class="input1">
+              <select id="output-language2"  name="output-language" class="input1">
                 <option value="english">English</option>
                 <option value="hindi">Hindi</option>
                 <option value="bengali">Bengali</option>
@@ -222,7 +223,7 @@
                 <option value="tamil">Tamil</option>
               </select>
             
-              <label for="file" class="custum-file-upload">
+              <label for="file" class="custum-file-upload" id="custum-file-upload">
                 <div class="icon">
                   <svg viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -235,21 +236,41 @@
                 <div class="text">
                   <span>Click to upload a .pdf File</span>
                 </div>
-                <input id="file" type="file" accept=".pdf">
+                <input id="file" type="file" accept=".pdf" name="file">
               </label>
               <div class="buttonsubmit">
-                <button class="button-confirm" id="button-submit" type="button">Submit</button>
+                <button class="button-confirm" id="button-submit" type="submit" >Submit</button>
               </div>
             </form>
           </div>
-          
+          <div class="file-name-display" id="file-name-display" style="display: none;"></div>
+          <div class="uploadmessage" id="upload-message"></div>
 
-          <div class="preview-container">
+          <div class="successfulmsg" id="successfulmsg"></div>
+
+          <div class="trans-loader" id="trans-loader" style="display: none;">
+            <span class="loader-text">Translating</span>
+            <span class="Tload"></span>
+          </div>
+
+          <div class="translatepdf">
+            <button type="submit" class="pdf-confirm" id="translate-pdf">Translate</button>
+          </div>
+
+          
+          <div class="preview-container" >
             <div id="preview" class="preview">
               <p><span>The preview of the translated file will appear here : </span></p>
               <div class="api-response-container" id="api-response-container">
                 <p id="api-response"> <span>Waiting for API response...</span></p>
               </div>
+
+              <!-- <div class="preview-container">
+                <div id="pdf-viewer" class="pdf-viewer"></div>
+                </div> -->
+                          
+              </div>
+            </div>
 
               <div class="download" id="downloadbutton">
                 <button class="button-download button-confirm" id="button-download" type="button"
@@ -258,8 +279,6 @@
 
               </div>
 
-            </div>
-          </div>
           <div class="originalrating">
             <p class="title" style="margin-bottom: 0px ;"> Rate our Translations</p>
 
@@ -332,11 +351,11 @@
               <form id="contact-form">
                 <div class="form-group">
                   <!-- <label for="email">Email:</label> -->
-                  <input type="email" id="email" name="email" placeholder="your e-mail" required >
+                  <input type="email" id="email" name="email" required >
                 </div>
                 <div class="form-group">
                   <!-- <label for="message">Message:</label> -->
-                  <input id="message" name="message" placeholder=" write your query" required>
+                  <input id="message" name="message" rows="3" required>
                 </div>
                 <button type="submit" class="btn-submit">Submit</button>
               </form>
@@ -422,6 +441,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/TextPlugin.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/CSSRulePlugin.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/Draggable.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script> -->
+  <script src="/JS/pdfFileTranslation.js"></script>
   <script src="/JS/chatbot.js"></script>
   <script src="/JS/script.js"></script>
   <script src="/JS/cursor.js"></script>

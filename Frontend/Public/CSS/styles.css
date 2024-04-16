@@ -758,7 +758,7 @@ body {
   --main-color: #000;
   padding: 20px;
   background: var(--bg-color);
-  opacity: 0.7;
+  opacity: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -791,6 +791,8 @@ body {
 .input1 {
   width: 300px; /* Fixed width */
   height: 40px; /* Fixed height */
+  display: block;
+  margin-top: 1%;
   border-radius: 5px;
   border: 2px solid var(--main-color);
   background-color: rgb(194, 194, 194);
@@ -853,6 +855,11 @@ body {
 }
 
 
+
+.button-confirm:hover {
+  transform: translateY(-2px); 
+
+}
 
 
 
@@ -1197,9 +1204,9 @@ h2 {
   margin-top: 10%;
   background-color: black;
   opacity: 0.7;
-  /* background-image: linear-gradient(to right, #bab9ba, #0c0c0c); */
-  background: linear-gradient(to left, rgba(0, 0, 0, 0.7), rgba(128, 0, 128, 0.5));
 }
+
+
 
 
 .contact-form {
@@ -1298,7 +1305,7 @@ h2 {
   color: #fff;
 }
 
-/* Define animation for twinkling effect */
+/* animation for twinkling effect */
 @keyframes stars {
   0% {
     background-position: 0 0;
@@ -1452,10 +1459,75 @@ h2 {
     "Lucida Sans", Arial, sans-serif;
 }
 
+#upload-message{
+  color: #fff;
+  margin-bottom: 10%;
+  font-size: 1.9rem;
+}
+
+#successfulmsg{
+  font-size: 1.5rem;
+  color: #FFFFFF;
+  margin-bottom: 5%;
+  margin-top: 5%;
+}
+
+#translate-pdf{
+  width: 120px;
+    height: 40px;
+    border-radius: 5px;
+    border: 2px solid var(--black-color);
+    color: rgb(250, 247, 249);
+    box-shadow: 4px 4px var(--main-color);
+    font-size: 17px;
+    font-weight: 600;
+    background: var(--main-color);
+    cursor: pointer;
+    margin-bottom: 20%;
+    display: none;
+}
+
+.button-download{
+  width: 120px;
+    height: 40px;
+    border-radius: 5px;
+    border: 2px solid var(--black-color);
+    color: rgb(250, 247, 249);
+    box-shadow: 4px 4px var(--main-color);
+    font-size: 17px;
+    font-weight: 600;
+    background: var(--main-color);
+    cursor: pointer;
+    margin-bottom: 20%;
+    position: relative;
+    bottom: 20px;
+}
+
+#translate-pdf:hover,
+.button-download:hover{
+  transform: translateY(-2px); 
+}
+
+
+.preview-container{
+  display: none;
+}
+
+
+.file-name-display
+{
+  display: block;
+  position: relative;
+  /* bottom: 190px; */
+  color: antiquewhite;
+  border: 2px solid white;
+  padding: 20px;
+}
+
 .api-response-container {
   height: 200px;
   width: 300px;
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   align-items: space-between;
   gap: 20px;
@@ -1469,6 +1541,7 @@ h2 {
   box-shadow: 0px 48px 35px -48px #e8e8e8;
   transition: all 0.3s;
   margin-top: 10%;
+  margin-left: 7%;
   display: none;
 }
 
@@ -1581,5 +1654,129 @@ footer {
   }
   100% {
     transform: scale(1);
+  }
+}
+
+
+/* Translating loader  */
+
+.trans-loader {
+  width: 80px;
+  height: 50px;
+  bottom: 20px;
+  position: relative;
+}
+
+.loader-text {
+  position: absolute;
+  top: 0;
+  padding: 0;
+  margin: 0;
+  color: #C8B6FF;
+  animation: text_713 3.5s ease both infinite;
+  font-size: .8rem;
+  letter-spacing: 1px;
+}
+
+.Tload {
+  background-color: #9A79FF;
+  border-radius: 50px;
+  display: block;
+  height: 16px;
+  width: 16px;
+  bottom: 0;
+  position: absolute;
+  transform: translateX(64px);
+  animation: loading_713 3.5s ease both infinite;
+}
+
+.Tload::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: #D1C2FF;
+  border-radius: inherit;
+  animation: loading2_713 3.5s ease both infinite;
+}
+
+@keyframes text_713 {
+  0% {
+    letter-spacing: 1px;
+    transform: translateX(0px);
+  }
+
+  40% {
+    letter-spacing: 2px;
+    transform: translateX(26px);
+  }
+
+  80% {
+    letter-spacing: 1px;
+    transform: translateX(32px);
+  }
+
+  90% {
+    letter-spacing: 2px;
+    transform: translateX(0px);
+  }
+
+  100% {
+    letter-spacing: 1px;
+    transform: translateX(0px);
+  }
+}
+
+@keyframes loading_713 {
+  0% {
+    width: 16px;
+    transform: translateX(0px);
+  }
+
+  40% {
+    width: 100%;
+    transform: translateX(0px);
+  }
+
+  80% {
+    width: 16px;
+    transform: translateX(64px);
+  }
+
+  90% {
+    width: 100%;
+    transform: translateX(0px);
+  }
+
+  100% {
+    width: 16px;
+    transform: translateX(0px);
+  }
+}
+
+@keyframes loading2_713 {
+  0% {
+    transform: translateX(0px);
+    width: 16px;
+  }
+
+  40% {
+    transform: translateX(0%);
+    width: 80%;
+  }
+
+  80% {
+    width: 100%;
+    transform: translateX(0px);
+  }
+
+  90% {
+    width: 80%;
+    transform: translateX(15px);
+  }
+
+  100% {
+    transform: translateX(0px);
+    width: 16px;
   }
 }
