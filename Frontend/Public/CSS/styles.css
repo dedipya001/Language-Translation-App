@@ -260,9 +260,25 @@ body {
 }
 
 .nav__toggle {
-  display: none;
+  /* display: none;*/
+  z-index: 1000000;
+  color: #ffffff;
 }
 
+@media screen and (max-width: 1150px) {
+  .nav__menu {
+    position: fixed;
+    top: -100%;
+    left: 0;
+    background-color: hsla(0, 0%, 0%, 0.75);
+    width: 100%;
+    height: 70vh;
+    padding-block: 1.8rem 5 rem;
+    text-align: center;
+    backdrop-filter: blur(8px);
+    transition: top 0.4s;
+  }
+}
 .menu,
 .nav__close {
   color: var(--white-color);
@@ -1137,12 +1153,12 @@ h2 {
 /* Hide scrollbar for Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: transparent transparent; 
+  /* scrollbar-color: transparent transparent;  */
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 *::-webkit-scrollbar {
-  width: 12px; /* Width of the scrollbar */
+  width: 20px; /* Width of the scrollbar */
 }
 
 *::-webkit-scrollbar-track {
@@ -1782,3 +1798,176 @@ footer {
     width: 16px;
   }
 }
+
+
+
+/* Media Queries */
+
+/* CSS for smaller screens */
+@media screen and (max-width: 780px) {
+  .nav__list {
+    display: none;
+  }
+
+
+  .background-image
+  {
+    overflow: hidden;
+  }
+
+  .nav__toggle {
+    display: block;
+  }
+
+  .nav__toggle.active {
+    display: block;
+  }
+
+  .nav__item {
+    width: 100%;
+    text-align: center;
+  }
+
+  .dropdown-content {
+    display: none;
+  }
+
+  .dropdown.active .dropdown-content {
+    display: block;
+  }
+
+  .nav__toggle
+  {
+    position: relative;
+    left: 23%;
+    bottom:7%
+  }
+
+  .nav__logo-name
+  {
+    position: relative;
+    right: 100%;
+  
+  }
+
+  .line1, .line2
+  {
+    position: relative;
+    left: 9%;
+  }
+
+  .tagline{
+    position: relative;
+    left: 10%;
+  
+  }
+
+  .sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    right: 2px;
+    z-index: 1000;
+    background-color:transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+  
+  .sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidebar a:hover {
+    color: #f1f1f1;
+  }
+  
+  .sidebar .close-btn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+
+  .overlay {
+    height: inherit;
+    width: inherit;
+    position: fixed;
+    top: 0;
+    right: 2px;
+    background-color: skyblue;
+    opacity: 0.1; /* Semi-transparent black */
+    z-index:999; /* Ensure overlay is below sidebar */
+    transition: 0.01s;
+    display: none;
+  }
+  .sidebar.active {
+    width: 250px; /* Adjust as needed */
+  }
+  
+  
+  .overlay.active {
+    display: block;
+    width: 100%;
+  }
+  
+  .sidebar a{
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 22px;
+    color: #c4b6b6;
+    display: block;
+    padding-bottom: 10%;
+    transition: 0.3s;
+  }
+
+  .chat_toggler {
+    background-color: #e016bb;
+    position: fixed;
+    left: 85%;
+    bottom: 2%;
+    padding: 1%;
+    border-radius: 50%;
+    opacity: 0.9;
+    z-index: 500000;
+  
+  }
+
+  #chat-container
+  {
+    position: fixed;
+    left: 54%;
+    bottom: 12%;
+  }
+
+  .tryit
+  {
+    position: relative;
+    left: 6%;
+  }
+  
+}
+
+
+/* Sidebar */
+
+
+/* CSS for sidebar */
+
+
+/* @media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+} */
+
+/* Frozen effect overlay */

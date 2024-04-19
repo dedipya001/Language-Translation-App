@@ -1,17 +1,17 @@
 
 
 .cursor{
-    position: absolute;
+    /* position: absolute;
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: #999797; /* Change the background color as needed */
-    z-index:auto;
+    background: #999797;
+    z-index:100000000;;
     pointer-events: none;
     opacity: 1;
     transition: opacity 0.3s ease-in-out, transform 0.1s ease-in-out;
     transform: translate(-50%, -50%);
-}
+} */
 
 .cursor.active{
     opacity: 0.7;

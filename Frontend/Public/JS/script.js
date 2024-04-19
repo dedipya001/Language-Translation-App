@@ -417,3 +417,80 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
+
+
+
+// JavaScript for toggling the navigation menu
+function toggleMenu() {
+  var navList = document.getElementById("nav-list");
+  navList.classList.toggle("active");
+}
+
+// Event listener for the nav toggle button
+document.getElementById("nav-toggle").addEventListener("click", toggleMenu);
+
+// Function to toggle dropdown menu
+function toggleDropdown(event) {
+  event.preventDefault();
+  var dropdown = event.target.parentElement;
+  dropdown.classList.toggle("active");
+}
+
+// Function for smooth scrolling
+function smoothScroll(target) {
+  document.querySelector(target).scrollIntoView({
+    behavior: 'smooth'
+  });
+}
+
+
+// JavaScript for toggling the sidebar
+function openNav() {
+  document.getElementById("sidebar").style.width = "250px";
+  document.getElementById("sidebar").style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
+  document.getElementById("sidebar").style.border = "1px solid #f0f0f0";
+  document.getElementById("nav-toggle").style.display = "none";
+  document.getElementById("sidebar").style.overflowY = "auto"; 
+  document.getElementById("sidebar").style.borderRight = "none";
+}
+
+function closeNav() {
+  document.getElementById("sidebar").style.width = "0";
+  document.getElementById("sidebar").style.boxShadow = "none";
+  document.getElementById("sidebar").style.border = "none";
+  document.getElementById("nav-toggle").style.display = "block";
+
+
+}
+
+// Event listener for the nav toggle button
+document.getElementById("nav-toggle").addEventListener("click", function() {
+  if (document.getElementById("sidebar").style.width === "250px") {
+    closeNav();
+  } else {
+    openNav();
+  }
+});
+
+// Function to toggle dropdown menu (keep it as it is)
+function toggleDropdown(event) {
+  event.preventDefault();
+  var dropdown = event.target.parentElement;
+  dropdown.classList.toggle("active");
+}
+
+// Function for smooth scrolling (keep it as it is)
+function smoothScroll(target) {
+  document.querySelector(target).scrollIntoView({
+    behavior: 'smooth'
+  });
+}
+
+
+function on() {
+  document.getElementById("overlay").style.display = "block";
+}
+
+function off() {
+  document.getElementById("overlay").style.display = "none";
+}

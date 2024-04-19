@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,shrink-to-fit=no" />
   <title>Linguist : The only language translator in the Linguistic Universe</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,11 +58,20 @@
             <a href="#services" class="nav__link" onclick="toggleDropdown(event)">Services <i
                 class="ri-arrow-down-s-fill"></i></a>
             <ul class="dropdown-content sub-menu">
-              <li><a href="#" class="sub-menu__link">Text Translation</a></li>
-              <li><a href="#" class="sub-menu__link">Text File Translation</a></li>
+              <li><a href="#" class="sub-menu__link" onclick="smoothScroll('#translcontainer')">Text Translation</a></li>
+              <li><a href="#" class="sub-menu__link" onclick="smoothScroll('#translcontainer')">Text File Translation</a></li>
             </ul>
           </li>
         </ul>
+
+        <!-- <div class="sidebar" id="sidebar"> -->
+  
+
+        <!-- Overlay -->
+        <!-- <div class="overlay" id="overlay" onclick="off()"></div>
+
+        </div> -->
+
 
       </nav>
     </header>
