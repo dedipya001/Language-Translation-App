@@ -37,7 +37,7 @@ connection.connect((err) => {
 
 // Render index.html
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'Public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'Public', 'Webpages/index.html'));
 });
 
 // Save ratings to the database

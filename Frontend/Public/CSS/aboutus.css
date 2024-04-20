@@ -1,0 +1,124 @@
+.team-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .tcard {
+    position: relative;
+    width: 250px;
+    height: 350px;
+    background: #f00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tcard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(315deg, #03a9f4, #ff0058);
+    z-index: -1;
+  }
+  
+  .tcard b {
+    position: absolute;
+    inset: 6px;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2;
+  }
+  
+  .tcard img {
+    position: absolute;
+    z-index: 3;
+    transform: scale(0.8);
+    opacity: 0.25;
+    transition: 0.5s;
+  }
+  
+  .tcard:hover img {
+    transform: scale(0.5);
+    opacity: 0.9;
+    transform: translateY(-70px);
+  }
+  
+  .tcard .content {
+    position: absolute;
+    bottom: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    transform: scale(0);
+    transition: 0.5s;
+  }
+  
+  .tcard:hover .content {
+    transform: scale(1);
+    bottom: 25px;
+  }
+  
+  .content .title {
+    color: #fff;
+    font-weight: 500;
+    line-height: 1em;
+    font-size: 1em;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  
+  .content .title span {
+    font-weight: 300;
+    font-size: 0.70em;
+  }
+  
+  .content .sci {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 5px;
+  }
+  
+  .sci li {
+    list-style: none;
+  }
+  
+  .sci li .fa-brands {
+    width: 14px;
+  }
+  
+  .sci li .fa-facebook {
+    width: 10px;
+  }
+  
+  .sci li a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.5);
+    background: rgba(0, 0, 0, 0.2);
+    fill: currentColor;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    transition: 0.5s;
+  }
+  
+  .sci li a:hover {
+    fill: currentColor;
+    color: rgba(255, 255, 255, 1);
+  }
+  
