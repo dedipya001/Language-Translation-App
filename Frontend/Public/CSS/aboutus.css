@@ -1,22 +1,33 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: black;
+}
+
 .team-container {
     display: flex;
     justify-content: space-around;
     align-items: center;
     height: 100vh;
+    background-color: black;
+    
   }
   
   .tcard {
     position: relative;
     width: 250px;
     height: 350px;
-    background: #f00;
+    /* opacity: 0.9; */
+    /* background: #f00; */
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(128, 0, 128, 0.7),rgba(0, 0, 0, 0.5));
+
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     overflow: hidden;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.827);
   }
   
   .tcard::before {
