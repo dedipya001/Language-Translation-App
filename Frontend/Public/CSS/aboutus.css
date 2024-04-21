@@ -217,7 +217,11 @@ body{
     flex-direction: column;
     overflow: hidden;
     border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.827);
+  }
+  .tcard:hover {
+    transform: translateY(-10px);
   }
   
   .tcard::before {
@@ -243,13 +247,13 @@ body{
     z-index: 3;
     transform: scale(0.8);
     opacity: 0.25;
-    transition: 0.5s;
+    transition: transform 0.5s, opacity 0.5s;
   }
   
   .tcard:hover img {
     transform: scale(0.5);
     opacity: 0.9;
-    transform: translateY(-70px);
+    /* transform: translateY(-70px); */
   }
   
   .tcard .content {
