@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Text Translator</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<h1>Text Translator</h1>
+
+<textarea id="inputText" rows="4" cols="50">Hello, world!</textarea>
+<br>
+
+<select id="sourceLang">
+  <option value="en">English</option>
+  <option value="es">Spanish</option>
+  <option value="fr">French</option>
+  <!-- Add more languages here -->
+</select>
+
+<select id="targetLang">
+  <option value="es">Spanish</option>
+  <option value="en">English</option>
+  <option value="fr">French</option>
+  <!-- Add more languages here -->
+</select>
+
+<br>
+<button id="translateButton">Translate</button>
+<br>
+<p id="translatedText"></p>
+
+<script>
+$(document).ready(function(){
+    $('#translateButton').click(function(){
+        translateText();
+    });
+});
+
+function translateText() {
+    const settings = {
+        async: true,
+        crossDomain: true,
+        url: 'https://google-translate1.p.rapidapi.com/language/translate/v2',
+        method: 'POST',
+        headers: {
+            'content-type': 'application/x-www-form-urlencoded',
+            'Accept-Encoding': 'application/gzip',
+            'X-RapidAPI-Key': 'af86f478b9msh6a4e08f261e30eap18f2c0jsnc01627cf9b57',
+            'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
+        },
+        data: {
+            q: $('#inputText').val(),
+            target: $('#targetLang').val(),
+            source: $('#sourceLang').val()
+        }
+    };
+
+    $.ajax(settings).done(function (response) {
+        $('#translatedText').text(response.data.translations[0].translatedText);
+    });
+}
+</script>
+
+</body>
+</html>
