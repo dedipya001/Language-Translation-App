@@ -104,6 +104,14 @@ uvicorn app:app --reload
 ```
 
 Now both your servers are up and running, feel free to try and experiment.
+## Contributing Members
+
+- [Dedipya Goswami](https://www.github.com/dedipya001)
+- [Abhay Raj](https://github.com/Abhayraj-13)
+- [Adnan Khan](https://github.com/Adnankhan0999)
+- [Akshay DM](https://github.com/D-M-AKSHAY)
+
+
 ## Contributing
 
 Contributions are always welcome!
@@ -142,6 +150,6 @@ Issue Tracking
 
 ## License
 
-Linguist is licensed under the MIT license. By contributing, you agree to abide by the terms of the license.
+Linguist is licensed under the [MIT License](https://choosealicense.com/licenses/mit/). By contributing, you agree to abide by the terms of the license.
 
 
