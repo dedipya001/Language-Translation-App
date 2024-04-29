@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 window.addEventListener("load", function () {
   const loader = document.getElementById("loadingWave");
   const content = document.getElementById("content");
@@ -160,8 +162,122 @@ function smoothScroll(target) {
 
 
 
-document.getElementById("transcontainer")
-  .addEventListener("submit", async function (event) {
+// document.getElementById("transcontainer")
+//   .addEventListener("submit", async function (event) {
+//     event.preventDefault();
+
+//     const inputText = document.getElementById("input-text").value;
+//     const inputLanguage = document.getElementById("input-language").value;
+//     const outputLanguage = document.getElementById("output-language").value;
+
+//     // Ensure input language is selected
+//     if (!inputLanguage) {
+//       console.error("Please select an input language.");
+//       return;
+//     }
+
+//     // Check if source and target languages are the same
+//     if (inputLanguage === outputLanguage) {
+//       // Display input text in output box with message in next line
+//       document.getElementById("output-text").textContent =
+//         inputText + "\n(input and output languages are the same)";
+//       return;
+//     }
+
+//     let translatedText;
+
+//     if (inputLanguage.toLowerCase() === 'english') {
+//       const requestBody = {
+//         text: inputText,
+//         source_language: inputLanguage,
+//         target_language: outputLanguage,
+//       };
+
+//       try {
+//         const response = await fetch("http://localhost:8000/translate/", {
+//           method: "POST",
+//           headers: {
+//             "Content-Type": "application/json",
+//           },
+//           body: JSON.stringify(requestBody),
+//         });
+
+//         if (!response.ok) {
+//           throw new Error("Translation request failed.");
+//         }
+
+//         translatedText = await response.json();
+//       } catch (error) {
+//         console.error("Translation error:", error);
+//         document.getElementById("output-text").textContent =
+//           "Translation failed.";
+//         return;
+//       }
+//     } else {
+//       const url = 'https://google-translate1.p.rapidapi.com/language/translate/v2/detect';
+//       const options = {
+//         method: 'POST',
+//         headers: {
+//           'content-type': 'application/x-www-form-urlencoded',
+//           'Accept-Encoding': 'application/gzip',
+//           'X-RapidAPI-Key': 'af86f478b9msh6a4e08f261e30eap18f2c0jsnc01627cf9b57',
+//           'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
+//         },
+//         body: new URLSearchParams({
+//           from: 'inputLanguage',
+//           to: 'outputLanguage',
+//           text: inputText
+//         })
+//       };
+
+//       try {
+//         const response = await fetch(url, options);
+//         const result = await response.json();
+//         const detectedLanguage = result.data.detections[0][0].language;
+//         translatedText = await translateWithGoogleAPI(inputText, detectedLanguage, outputLanguage);
+//       } catch (error) {
+//         console.error(error);
+//         document.getElementById("output-text").textContent =
+//           "Translation failed.";
+//         return;
+//       }
+//     }
+
+//     document.getElementById("output-text").textContent = translatedText;
+//     setTimeout(showPopup, 5000); // Show popup after 5 seconds delay
+//   });
+
+// async function translateWithGoogleAPI(text, sourceLanguage, targetLanguage) {
+//   const url = 'https://google-translate1.p.rapidapi.com/language/translate/v2';
+//   const options = {
+//     method: 'POST',
+//     headers: {
+//       'content-type': 'application/x-www-form-urlencoded',
+//       'Accept-Encoding': 'application/gzip',
+//       'X-RapidAPI-Key': 'f3df6d5643mshabbfce8866c5092p19b6a7jsncbaf134ec4bf',
+//       'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
+//     },
+//     body: new URLSearchParams({
+//       q: text,
+//       source: sourceLanguage,
+//       target: targetLanguage
+//     })
+//   };
+
+//   try {
+//     const response = await fetch(url, options);
+//     const result = await response.json();
+//     return result.data.translations[0].translatedText;
+//   } catch (error) {
+//     throw new Error("Translation request failed.");
+//   }
+// }
+
+
+
+
+
+document.getElementById("transcontainer").addEventListener("submit", async function (event) {
     event.preventDefault();
 
     const inputText = document.getElementById("input-text").value;
@@ -212,64 +328,36 @@ document.getElementById("transcontainer")
         return;
       }
     } else {
-      const url = 'https://google-translate1.p.rapidapi.com/language/translate/v2/detect';
+      const encodedParams = new URLSearchParams();
+      encodedParams.set('from', inputLanguage);
+      encodedParams.set('to', outputLanguage);
+      encodedParams.set('text', inputText);
+
       const options = {
         method: 'POST',
+        url: 'https://google-translate113.p.rapidapi.com/api/v1/translator/text',
         headers: {
           'content-type': 'application/x-www-form-urlencoded',
-          'Accept-Encoding': 'application/gzip',
-          'X-RapidAPI-Key': 'f3df6d5643mshabbfce8866c5092p19b6a7jsncbaf134ec4bf',
-          'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
+          'X-RapidAPI-Key': 'a15cf71cc7msh2e05379b8c0d3bdp1e1c09jsnf39247421d68',
+          'X-RapidAPI-Host': 'google-translate113.p.rapidapi.com'
         },
-        body: new URLSearchParams({
-          q: inputText
-        })
+        data: encodedParams,
+      
       };
 
+
+    }});
+
       try {
-        const response = await fetch(url, options);
-        const result = await response.json();
-        const detectedLanguage = result.data.detections[0][0].language;
-        translatedText = await translateWithGoogleAPI(inputText, detectedLanguage, outputLanguage);
+        const response = await axios.request(options);
+        translatedText = response.data; // Assuming the response contains the translated text directly
       } catch (error) {
         console.error(error);
         document.getElementById("output-text").textContent =
           "Translation failed.";
         return;
       }
-    }
-
-    document.getElementById("output-text").textContent = translatedText;
-    setTimeout(showPopup, 5000); // Show popup after 5 seconds delay
-  });
-
-async function translateWithGoogleAPI(text, sourceLanguage, targetLanguage) {
-  const url = 'https://google-translate1.p.rapidapi.com/language/translate/v2';
-  const options = {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/x-www-form-urlencoded',
-      'Accept-Encoding': 'application/gzip',
-      'X-RapidAPI-Key': 'f3df6d5643mshabbfce8866c5092p19b6a7jsncbaf134ec4bf',
-      'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
-    },
-    body: new URLSearchParams({
-      q: text,
-      source: sourceLanguage,
-      target: targetLanguage
-    })
-  };
-
-  try {
-    const response = await fetch(url, options);
-    const result = await response.json();
-    return result.data.translations[0].translatedText;
-  } catch (error) {
-    throw new Error("Translation request failed.");
-  }
-}
-
-
+    
 
 // Function to display the pop-up dialog box
 function showPopup() {
