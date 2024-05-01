@@ -1,5 +1,3 @@
-const axios = require('axios');
-
 window.addEventListener("load", function () {
   const loader = document.getElementById("loadingWave");
   const content = document.getElementById("content");
@@ -12,7 +10,6 @@ window.addEventListener("load", function () {
     loader.style.display = "none";
     content.style.display = "block"; // Show the content after loader hides
   }, 3000);
-  
 });
 
 //background animation
@@ -24,11 +21,11 @@ gsap.to(".background-image", {
   ease: "linear",
 });
 
-function toggleDropdown(event) {
-  event.preventDefault();
-  const dropdownContent = event.target.nextElementSibling;
-  dropdownContent.classList.toggle("show");
-}
+// function toggleDropdown(event) {
+//   event.preventDefault();
+//   const dropdownContent = event.target.nextElementSibling;
+//   dropdownContent.classList.toggle("show");
+// }
 
 document.addEventListener("click", function (event) {
   const dropdowns = document.querySelectorAll(".dropdown");
@@ -44,13 +41,12 @@ window.addEventListener("load", function () {
   const loader = document.getElementById("loadingWave");
   // const content = document.getElementById("content");
   const homeDiv = document.getElementById("home");
-  const welcome=document.getElementById("welcome")
+  const welcome = document.getElementById("welcome");
   // Show the loader
   loader.style.display = "flex";
-  
-  welcome.style.display='none';
-  
- 
+
+  welcome.style.display = "none";
+
   // After 3 seconds, hide the loader and show the content
   setTimeout(function () {
     loader.style.display = "none";
@@ -62,13 +58,26 @@ window.addEventListener("load", function () {
       y: -window.innerHeight,
       opacity: 0,
       ease: "power1.inOut",
-      onComplete: function() {
-        welcome.style.display="block";
+      onComplete: function () {
+        welcome.style.display = "block";
         // After rocket flies off the screen, animate home div
-        gsap.fromTo(homeDiv, { scale: 1 }, { scale: 1.5, duration: 0.3, ease: "power1.inOut", onComplete: function() {
-          gsap.to(homeDiv, { scale: 1, duration: 0.3, ease: "power1.inOut" });
-        }});        
-      }
+        gsap.fromTo(
+          homeDiv,
+          { scale: 1 },
+          {
+            scale: 1.5,
+            duration: 0.3,
+            ease: "power1.inOut",
+            onComplete: function () {
+              gsap.to(homeDiv, {
+                scale: 1,
+                duration: 0.3,
+                ease: "power1.inOut",
+              });
+            },
+          }
+        );
+      },
     });
   }, 4000);
 });
@@ -107,177 +116,10 @@ function smoothScroll(target) {
     behavior: "smooth", // This triggers smooth scrolling animation
   });
 }
-
+//-------this is the working code only for english language, other translations are not good.
 // //Translation
-// document.getElementById("transcontainer")
-//   .addEventListener("submit", async function (event) {
-//     event.preventDefault();
-
-//     const inputText = document.getElementById("input-text").value;
-//     const inputLanguage = document.getElementById("input-language").value;
-//     const outputLanguage = document.getElementById("output-language").value;
-
-//     // Ensure input language is selected
-//     if (!inputLanguage) {
-//       console.error("Please select an input language.");
-//       return;
-//     }
-
-//     // Check if source and target languages are the same
-//     if (inputLanguage === outputLanguage) {
-//       // Display input text in output box with message in next line
-//       document.getElementById("output-text").textContent =
-//         inputText + "\n(input and output languages are the same)";
-//       return;
-//     }
-
-//     const requestBody = {
-//       text: inputText,
-//       source_language: inputLanguage,
-//       target_language: outputLanguage,
-//     };
-
-//     try {
-//       const response = await fetch("http://localhost:8000/translate/", {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(requestBody),
-//       });
-
-//       if (!response.ok) {
-//         throw new Error("Translation request failed.");
-//       }
-
-//       const translatedText = await response.json();
-//       document.getElementById("output-text").textContent = translatedText[0];
-//       setTimeout(showPopup, 5000); // Show popup after 1 second delay
-//     } catch (error) {
-//       console.error("Translation error:", error);
-//       document.getElementById("output-text").textContent =
-//         "Translation failed.";
-//     }
-//   });
-
-
-
-// document.getElementById("transcontainer")
-//   .addEventListener("submit", async function (event) {
-//     event.preventDefault();
-
-//     const inputText = document.getElementById("input-text").value;
-//     const inputLanguage = document.getElementById("input-language").value;
-//     const outputLanguage = document.getElementById("output-language").value;
-
-//     // Ensure input language is selected
-//     if (!inputLanguage) {
-//       console.error("Please select an input language.");
-//       return;
-//     }
-
-//     // Check if source and target languages are the same
-//     if (inputLanguage === outputLanguage) {
-//       // Display input text in output box with message in next line
-//       document.getElementById("output-text").textContent =
-//         inputText + "\n(input and output languages are the same)";
-//       return;
-//     }
-
-//     let translatedText;
-
-//     if (inputLanguage.toLowerCase() === 'english') {
-//       const requestBody = {
-//         text: inputText,
-//         source_language: inputLanguage,
-//         target_language: outputLanguage,
-//       };
-
-//       try {
-//         const response = await fetch("http://localhost:8000/translate/", {
-//           method: "POST",
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//           body: JSON.stringify(requestBody),
-//         });
-
-//         if (!response.ok) {
-//           throw new Error("Translation request failed.");
-//         }
-
-//         translatedText = await response.json();
-//       } catch (error) {
-//         console.error("Translation error:", error);
-//         document.getElementById("output-text").textContent =
-//           "Translation failed.";
-//         return;
-//       }
-//     } else {
-//       const url = 'https://google-translate1.p.rapidapi.com/language/translate/v2/detect';
-//       const options = {
-//         method: 'POST',
-//         headers: {
-//           'content-type': 'application/x-www-form-urlencoded',
-//           'Accept-Encoding': 'application/gzip',
-//           'X-RapidAPI-Key': 'af86f478b9msh6a4e08f261e30eap18f2c0jsnc01627cf9b57',
-//           'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
-//         },
-//         body: new URLSearchParams({
-//           from: 'inputLanguage',
-//           to: 'outputLanguage',
-//           text: inputText
-//         })
-//       };
-
-//       try {
-//         const response = await fetch(url, options);
-//         const result = await response.json();
-//         const detectedLanguage = result.data.detections[0][0].language;
-//         translatedText = await translateWithGoogleAPI(inputText, detectedLanguage, outputLanguage);
-//       } catch (error) {
-//         console.error(error);
-//         document.getElementById("output-text").textContent =
-//           "Translation failed.";
-//         return;
-//       }
-//     }
-
-//     document.getElementById("output-text").textContent = translatedText;
-//     setTimeout(showPopup, 5000); // Show popup after 5 seconds delay
-//   });
-
-// async function translateWithGoogleAPI(text, sourceLanguage, targetLanguage) {
-//   const url = 'https://google-translate1.p.rapidapi.com/language/translate/v2';
-//   const options = {
-//     method: 'POST',
-//     headers: {
-//       'content-type': 'application/x-www-form-urlencoded',
-//       'Accept-Encoding': 'application/gzip',
-//       'X-RapidAPI-Key': 'f3df6d5643mshabbfce8866c5092p19b6a7jsncbaf134ec4bf',
-//       'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
-//     },
-//     body: new URLSearchParams({
-//       q: text,
-//       source: sourceLanguage,
-//       target: targetLanguage
-//     })
-//   };
-
-//   try {
-//     const response = await fetch(url, options);
-//     const result = await response.json();
-//     return result.data.translations[0].translatedText;
-//   } catch (error) {
-//     throw new Error("Translation request failed.");
-//   }
-// }
-
-
-
-
-
-document.getElementById("transcontainer").addEventListener("submit", async function (event) {
+document.getElementById("transcontainer")
+  .addEventListener("submit", async function (event) {
     event.preventDefault();
 
     const inputText = document.getElementById("input-text").value;
@@ -298,66 +140,227 @@ document.getElementById("transcontainer").addEventListener("submit", async funct
       return;
     }
 
-    let translatedText;
+    const requestBody = {
+      text: inputText,
+      source_language: inputLanguage,
+      target_language: outputLanguage,
+    };
 
-    if (inputLanguage.toLowerCase() === 'english') {
-      const requestBody = {
-        text: inputText,
-        source_language: inputLanguage,
-        target_language: outputLanguage,
-      };
-
-      try {
-        const response = await fetch("http://localhost:8000/translate/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(requestBody),
-        });
-
-        if (!response.ok) {
-          throw new Error("Translation request failed.");
-        }
-
-        translatedText = await response.json();
-      } catch (error) {
-        console.error("Translation error:", error);
-        document.getElementById("output-text").textContent =
-          "Translation failed.";
-        return;
-      }
-    } else {
-      const encodedParams = new URLSearchParams();
-      encodedParams.set('from', inputLanguage);
-      encodedParams.set('to', outputLanguage);
-      encodedParams.set('text', inputText);
-
-      const options = {
-        method: 'POST',
-        url: 'https://google-translate113.p.rapidapi.com/api/v1/translator/text',
+    try {
+      const response = await fetch("http://localhost:8000/translate/", {
+        method: "POST",
         headers: {
-          'content-type': 'application/x-www-form-urlencoded',
-          'X-RapidAPI-Key': 'a15cf71cc7msh2e05379b8c0d3bdp1e1c09jsnf39247421d68',
-          'X-RapidAPI-Host': 'google-translate113.p.rapidapi.com'
+          "Content-Type": "application/json",
         },
-        data: encodedParams,
-      
-      };
+        body: JSON.stringify(requestBody),
+      });
 
-
-    }});
-
-      try {
-        const response = await axios.request(options);
-        translatedText = response.data; // Assuming the response contains the translated text directly
-      } catch (error) {
-        console.error(error);
-        document.getElementById("output-text").textContent =
-          "Translation failed.";
-        return;
+      if (!response.ok) {
+        throw new Error("Translation request failed.");
       }
-    
+
+      const translatedText = await response.json();
+      document.getElementById("output-text").textContent = translatedText[0];
+      setTimeout(showPopup, 5000); // Show popup after 1 second delay
+    } catch (error) {
+      console.error("Translation error:", error);
+      document.getElementById("output-text").textContent =
+        "Translation failed.";
+    }
+  });
+
+// document.getElementById("transcontainer").addEventListener("submit", async function (event) {
+//   event.preventDefault();
+
+//   const inputText = document.getElementById("input-text").value;
+//   const inputLanguage = document.getElementById("input-language").value;
+//   const outputLanguage = document.getElementById("output-language").value;
+
+//   if (!inputLanguage) {
+//     console.error("Please select an input language.");
+//     return;
+//   }
+
+//   if (inputLanguage === outputLanguage) {
+//     document.getElementById("output-text").textContent = inputText + "\n(input and output languages are the same)";
+//     return;
+//   }
+
+//   let translatedText;
+
+//   if (inputLanguage.toLowerCase() === "english") {
+//     const requestBody = {
+//       text: inputText,
+//       source_language: inputLanguage,
+//       target_language: outputLanguage,
+//     };
+
+//     try {
+//       const response = await fetch("http://localhost:8000/translate/", {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(requestBody),
+//       });
+
+//       if (!response.ok) {
+//         throw new Error("Translation request failed.");
+//       }
+
+//       translatedText = await response.json();
+//     } catch (error) {
+//       console.error("Translation error:", error);
+//       document.getElementById("output-text").textContent = "Translation failed.";
+//       return;
+//     }
+//   } else {
+//     const url = 'https://google-api31.p.rapidapi.com/gtranslate';
+//     const options = {
+//       method: 'POST',
+//       headers: {
+//         'content-type': 'application/json',
+//         'X-RapidAPI-Key': 'f3df6d5643mshabbfce8866c5092p19b6a7jsncbaf134ec4bf',
+//         'X-RapidAPI-Host': 'google-api31.p.rapidapi.com'
+//       },
+//       body: JSON.stringify({
+//         text: inputText,
+//         to: outputLanguage,
+//         from_lang: inputLanguage
+//       })
+//     };
+
+//     try {
+//       const response = await fetch(url, options);
+//       console.log(response)
+//       const result = await response.text();
+//       console.log("Translated text:", result);
+//       translatedText = result;
+//     } catch (error) {
+//       console.error(error);
+//       document.getElementById("output-text").textContent = "Translation failed.";
+//       return;
+//     }
+//   }
+
+//   // Display translated text
+//   console.log("Translated text:", translatedText);
+//   document.getElementById("output-text").textContent = translatedText;
+//   setTimeout(showPopup, 5000); // Show popup after 5 seconds delay
+// });
+
+
+// ---------Yeh nhi ho rha-------------
+
+// document.getElementById("transcontainer").addEventListener("submit", async function (event) {
+//   event.preventDefault();
+
+//   const inputText = document.getElementById("input-text").value;
+//   const inputLanguage = document.getElementById("input-language").value;
+//   const outputLanguage = document.getElementById("output-language").value;
+
+//   if (!inputLanguage) {
+//     console.error("Please select an input language.");
+//     return;
+//   }
+
+//   if (inputLanguage === outputLanguage) {
+//     document.getElementById("output-text").textContent = inputText + "\n(input and output languages are the same)";
+//     return;
+//   }
+
+//   let translatedText;
+
+//   if (inputLanguage.toLowerCase() === "english") {
+//     const requestBody = {
+//       text: inputText,
+//       source_language: inputLanguage,
+//       target_language: outputLanguage,
+//     };
+
+//     try {
+//       const response = await fetch("http://localhost:8000/translate/", {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(requestBody),
+//       });
+
+//       if (!response.ok) {
+//         throw new Error("Translation request failed.");
+//       }
+
+//       const result = await response.json();
+//       translatedText = result.translated_text;
+//     } catch (error) {
+//       console.error("Translation error:", error);
+//       document.getElementById("output-text").textContent = "Translation failed.";
+//       return;
+//     }
+//   } else {
+//     const url = 'https://google-api31.p.rapidapi.com/gtranslate';
+//     const options = {
+//       method: 'POST',
+//       headers: {
+//         'content-type': 'application/json',
+//         'X-RapidAPI-Key': 'f3df6d5643mshabbfce8866c5092p19b6a7jsncbaf134ec4bf',
+//         'X-RapidAPI-Host': 'google-api31.p.rapidapi.com'
+//       },
+//       body: JSON.stringify({
+//         text: inputText,
+//         to: outputLanguage,
+//         from_lang: inputLanguage
+//       })
+//     };
+
+//     try {
+//       const response = await fetch(url, options);
+//       const result = await response.json();
+//       translatedText = result.translated_text;
+//     } catch (error) {
+//       console.error(error);
+//       // document.getElementById("output-text").textContent = "Translation failed.";
+//       document.getElementById("output-text").innerHTML = "Translation failed.";
+
+//       return;
+//     }
+//   }
+
+//   // Display translated text
+//   // document.getElementById("output-text").textContent = translatedText;
+//   document.getElementById("output-text").innerHTML = translatedText;
+//   console.log("Translation done ")
+// });
+
+
+
+
+async function translateWithGoogleAPI(text, sourceLanguage, targetLanguage) {
+  const url = "https://google-translate1.p.rapidapi.com/language/translate/v2";
+  const options = {
+    method: "POST",
+    headers: {
+      "content-type": "application/x-www-form-urlencoded",
+      "Accept-Encoding": "application/gzip",
+      "X-RapidAPI-Key": "f3df6d5643mshabbfce8866c5092p19b6a7jsncbaf134ec4bf",
+      "X-RapidAPI-Host": "google-translate1.p.rapidapi.com",
+    },
+    body: new URLSearchParams({
+      q: text,
+      source: sourceLanguage,
+      target: targetLanguage,
+    }),
+  };
+
+  try {
+    const response = await fetch(url, options);
+    const result = await response.json();
+    return result.data.translations[0].translatedText;
+  } catch (error) {
+    throw new Error("Translation request failed.");
+  }
+}
 
 // Function to display the pop-up dialog box
 function showPopup() {
@@ -372,7 +375,6 @@ document.querySelector(".close-btn").addEventListener("click", function () {
 });
 
 const stars = document.querySelectorAll(".star");
-
 
 stars.forEach((star, index) => {
   star.addEventListener("click", function () {
@@ -413,15 +415,12 @@ stars.forEach((star, index) => {
       .catch((error) => {
         console.error("There was a problem with your fetch operation:", error);
       });
-
-    
   });
 });
 
 const stars2 = document.querySelectorAll(".s");
 
 stars2.forEach((star, index) => {
-
   const inputLanguageElement = document.getElementById("input-language");
   const inputLanguage = inputLanguageElement.value;
   const outputLanguageElement = document.getElementById("output-language");
@@ -431,7 +430,7 @@ stars2.forEach((star, index) => {
 
     console.log("Star selected:", index + 1, "Rating:", ratingValue);
     console.log(
-      "Input Language:", 
+      "Input Language:",
       inputLanguage,
       "Output Language:",
       outputLanguage
@@ -514,8 +513,6 @@ stars3.forEach((star, index) => {
   });
 });
 
-
-
 //scrollbar
 
 // // GSAP Animation
@@ -578,48 +575,46 @@ function download() {
   window.location.href = "textfile.txt";
 }
 
-
-document.addEventListener("DOMContentLoaded", function() {
-  const floatingPlanets = document.querySelectorAll('.floating-planet');
+document.addEventListener("DOMContentLoaded", function () {
+  const floatingPlanets = document.querySelectorAll(".floating-planet");
   const minGap = 200; // Minimum gap between planets
 
   const planetPositions = [];
 
-  floatingPlanets.forEach(function(planet) {
-      let randomX, randomY;
-      do {
-          randomX = Math.random() * (window.innerWidth - planet.offsetWidth);
-          randomY = Math.random() * (window.innerHeight - planet.offsetHeight);
-      } while (hasCollision(randomX, randomY));
+  floatingPlanets.forEach(function (planet) {
+    let randomX, randomY;
+    do {
+      randomX = Math.random() * (window.innerWidth - planet.offsetWidth);
+      randomY = Math.random() * (window.innerHeight - planet.offsetHeight);
+    } while (hasCollision(randomX, randomY));
   });
 
   function hasCollision(x, y) {
-      for (let i = 0; i < planetPositions.length; i++) {
-          const position = planetPositions[i];
-          const distance = Math.sqrt(Math.pow(x - position.x, 2) + Math.pow(y - position.y, 2));
-          if (distance < minGap) {
-              return true; // Collision detected
-          }
+    for (let i = 0; i < planetPositions.length; i++) {
+      const position = planetPositions[i];
+      const distance = Math.sqrt(
+        Math.pow(x - position.x, 2) + Math.pow(y - position.y, 2)
+      );
+      if (distance < minGap) {
+        return true; // Collision detected
       }
-      return false; // No collision
+    }
+    return false; // No collision
   }
 
-  floatingPlanets.forEach(function(planet) {
-      // Random rotation speed between 1 and 3 rotations per second
-      const rotationSpeed = (Math.random() * 2 + 1) * 20;
+  floatingPlanets.forEach(function (planet) {
+    // Random rotation speed between 1 and 3 rotations per second
+    const rotationSpeed = (Math.random() * 2 + 1) * 20;
 
-      // Use GSAP to rotate the planet horizontally indefinitely
-      gsap.to(planet, {
-          // rotationZ: 360,
-          duration: rotationSpeed,
-          repeat: -1,
-          ease: "none",
-      });
+    // Use GSAP to rotate the planet horizontally indefinitely
+    gsap.to(planet, {
+      // rotationZ: 360,
+      duration: rotationSpeed,
+      repeat: -1,
+      ease: "none",
+    });
   });
 });
-
-
-
 
 // JavaScript for toggling the navigation menu
 function toggleMenu() {
@@ -628,7 +623,7 @@ function toggleMenu() {
 }
 
 // Event listener for the nav toggle button
-document.getElementById("nav-toggle").addEventListener("click", toggleMenu);
+// document.getElementById("nav-toggle").addEventListener("click", toggleMenu);
 
 // Function to toggle dropdown menu
 function toggleDropdown(event) {
@@ -638,20 +633,20 @@ function toggleDropdown(event) {
 }
 
 // Function for smooth scrolling
-function smoothScroll(target) {
-  document.querySelector(target).scrollIntoView({
-    behavior: 'smooth'
-  });
-}
-
+// function smoothScroll(target) {
+//   document.querySelector(target).scrollIntoView({
+//     behavior: 'smooth'
+//   });
+// }
 
 // JavaScript for toggling the sidebar
 function openNav() {
   document.getElementById("sidebar").style.width = "250px";
-  document.getElementById("sidebar").style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
+  document.getElementById("sidebar").style.boxShadow =
+    "0 4px 8px rgba(0, 0, 0, 0.1)";
   document.getElementById("sidebar").style.border = "1px solid #f0f0f0";
   document.getElementById("nav-toggle").style.display = "none";
-  document.getElementById("sidebar").style.overflowY = "auto"; 
+  document.getElementById("sidebar").style.overflowY = "auto";
   document.getElementById("sidebar").style.borderRight = "none";
 }
 
@@ -660,33 +655,30 @@ function closeNav() {
   document.getElementById("sidebar").style.boxShadow = "none";
   document.getElementById("sidebar").style.border = "none";
   document.getElementById("nav-toggle").style.display = "block";
-
-
 }
 
 // Event listener for the nav toggle button
-document.getElementById("nav-toggle").addEventListener("click", function() {
-  if (document.getElementById("sidebar").style.width === "250px") {
-    closeNav();
-  } else {
-    openNav();
-  }
-});
+// document.getElementById("nav-toggle").addEventListener("click", function () {
+//   if (document.getElementById("sidebar").style.width === "250px") {
+//     closeNav();
+//   } else {
+//     openNav();
+//   }
+// });
 
 // Function to toggle dropdown menu (keep it as it is)
-function toggleDropdown(event) {
-  event.preventDefault();
-  var dropdown = event.target.parentElement;
-  dropdown.classList.toggle("active");
-}
+// function toggleDropdown(event) {
+//   event.preventDefault();
+//   var dropdown = event.target.parentElement;
+//   dropdown.classList.toggle("active");
+// }
 
 // Function for smooth scrolling (keep it as it is)
-function smoothScroll(target) {
-  document.querySelector(target).scrollIntoView({
-    behavior: 'smooth'
-  });
-}
-
+// function smoothScroll(target) {
+//   document.querySelector(target).scrollIntoView({
+//     behavior: 'smooth'
+//   });
+// }
 
 function on() {
   document.getElementById("overlay").style.display = "block";

@@ -76,6 +76,7 @@ body {
   background-size: cover;
   animation: moveStars 200s linear infinite;
   animation-direction: alternate;
+  overflow: hidden;
 }
 
 @keyframes moveStars {
