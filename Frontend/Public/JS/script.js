@@ -120,57 +120,57 @@ function smoothScroll(target) {
 // //Translation
 //------------------------------------------working----------------------------------------------
 
-document.getElementById("transcontainer")
-  .addEventListener("submit", async function (event) {
-    event.preventDefault();
+// document.getElementById("transcontainer")
+//   .addEventListener("submit", async function (event) {
+//     event.preventDefault();
 
-    const inputText = document.getElementById("input-text").value;
-    const inputLanguage = document.getElementById("input-language").value;
-    const outputLanguage = document.getElementById("output-language").value;
+//     const inputText = document.getElementById("input-text").value;
+//     const inputLanguage = document.getElementById("input-language").value;
+//     const outputLanguage = document.getElementById("output-language").value;
 
-    // Ensure input language is selected
+//     // Ensure input language is selected
     
-    if (!inputLanguage) {
-      console.error("Please select an input language.");
-      return;
-    }
+//     if (!inputLanguage) {
+//       console.error("Please select an input language.");
+//       return;
+//     }
 
-    // Check if source and target languages are the same
-    if (inputLanguage === outputLanguage) {
-      // Display input text in output box with message in next line
-      document.getElementById("output-text").textContent =
-        inputText + "\n(input and output languages are the same)";
-      return;
-    }
+//     // Check if source and target languages are the same
+//     if (inputLanguage === outputLanguage) {
+//       // Display input text in output box with message in next line
+//       document.getElementById("output-text").textContent =
+//         inputText + "\n(input and output languages are the same)";
+//       return;
+//     }
 
-    const requestBody = {
-      text: inputText,
-      source_language: inputLanguage,
-      target_language: outputLanguage,
-    };
+//     const requestBody = {
+//       text: inputText,
+//       source_language: inputLanguage,
+//       target_language: outputLanguage,
+//     };
 
-    try {
-      const response = await fetch("http://localhost:8000/translate/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestBody),
-      });
+//     try {
+//       const response = await fetch("http://localhost:8000/translate/", {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(requestBody),
+//       });
 
-      if (!response.ok) {
-        throw new Error("Translation request failed.");
-      }
+//       if (!response.ok) {
+//         throw new Error("Translation request failed.");
+//       }
 
-      const translatedText = await response.json();
-      document.getElementById("output-text").textContent = translatedText[0];
-      setTimeout(showPopup, 5000); // Show popup after 1 second delay
-    } catch (error) {
-      console.error("Translation error:", error);
-      document.getElementById("output-text").textContent =
-        "Translation failed.";
-    }
-  });
+//       const translatedText = await response.json();
+//       document.getElementById("output-text").textContent = translatedText[0];
+//       setTimeout(showPopup, 5000); // Show popup after 1 second delay
+//     } catch (error) {
+//       console.error("Translation error:", error);
+//       document.getElementById("output-text").textContent =
+//         "Translation failed.";
+//     }
+//   });
 
   //----------------------------------working----------------------------------------------
 
@@ -257,8 +257,12 @@ document.getElementById("transcontainer")
 
 // ---------Yeh nhi ho rha-------------
 
+// JavaScript
 document.getElementById("transcontainer").addEventListener("submit", async function (event) {
   event.preventDefault();
+  
+  // Show loader
+  // document.getElementById("loadertrans").style.display = "block";
 
   const inputText = document.getElementById("input-text").value;
   const inputLanguage = document.getElementById("input-language").value;
@@ -271,12 +275,27 @@ document.getElementById("transcontainer").addEventListener("submit", async funct
 
   if (inputLanguage === outputLanguage) {
     document.getElementById("output-text").textContent = inputText + "\n(input and output languages are the same)";
+    // Hide loader
+    // document.getElementById("loadertrans").style.display = "none";
     return;
   }
 
-//   let translatedText;
+  // let translatedText;
 
   if (inputLanguage.toLowerCase() === "english") {
+    if (!inputLanguage) {
+      console.error("Please select an input language.");
+      return;
+    }
+
+    // Check if source and target languages are the same
+    if (inputLanguage === outputLanguage) {
+      // Display input text in output box with message in next line
+      document.getElementById("output-text").textContent =
+        inputText + "\n(input and output languages are the same)";
+      return;
+    }
+
     const requestBody = {
       text: inputText,
       source_language: inputLanguage,
@@ -296,14 +315,16 @@ document.getElementById("transcontainer").addEventListener("submit", async funct
         throw new Error("Translation request failed.");
       }
 
-      const result = await response.json();
-      translatedText = result.translated_text;
+      const translatedText = await response.json();
+      document.getElementById("output-text").textContent = translatedText[0];
+      setTimeout(showPopup, 5000); // Show popup after 1 second delay
     } catch (error) {
       console.error("Translation error:", error);
-      document.getElementById("output-text").textContent = "Translation failed.";
-      return;
+      document.getElementById("output-text").textContent =
+        "Translation failed.";
     }
   } else {
+    let translatedText;
     const url = 'https://google-api31.p.rapidapi.com/gtranslate';
     const options = {
       method: 'POST',
@@ -323,20 +344,25 @@ document.getElementById("transcontainer").addEventListener("submit", async funct
       const response = await fetch(url, options);
       const result = await response.json();
       translatedText = result.translated_text;
+      // document.getElementById("loadertrans").style.display = "none";
+      // setTimeout(showPopup, 5000); // Show popup after 1 second delay
+
     } catch (error) {
       console.error(error);
-      // document.getElementById("output-text").textContent = "Translation failed.";
       document.getElementById("output-text").innerHTML = "Translation failed.";
-
+      // Hide loader
+      // document.getElementById("loadertrans").style.display = "none";
       return;
     }
   
-
+  
   // Display translated text
-  // document.getElementById("output-text").textContent = translatedText;
   document.getElementById("output-text").innerHTML = translatedText;
-  console.log("Translation done ")
+  console.log("Translation done ");
   }
+  // Hide loader
+  // document.getElementById("loadertrans").style.display = "none";
+  
 });
 
 
