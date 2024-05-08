@@ -143,7 +143,9 @@ async def download_pdf(target_language: str):
             }
         ]
     }
-    convertapi_secret = os.getenv("CONVERTAPI_SECRET")
+    # convertapi_secret = os.getenv("CONVERTAPI_SECRET")
+    convertapi_secret = "WhW5c8cK4rN6kR44"
+
     if not convertapi_secret:
         raise ValueError("CONVERTAPI_SECRET environment variable is not set.")
     response = requests.post(f"{api_endpoint}?Secret={convertapi_secret}", json=payload)
