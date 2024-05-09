@@ -54,7 +54,7 @@
             <a href="" class="nav__link active-link">Home</a>
           </li>
           <li class="nav__item">
-            <a href="Webpages/aboutUs.html" target="_blank" class="nav__link">About Website</a>
+            <a href="/Webpages/aboutUs.html" target="_blank" class="nav__link">About Website</a>
           </li>
           <li class="nav__item dropdown">
             <a href="#services" class="nav__link" onclick="toggleDropdown(event)">Services <i
@@ -362,7 +362,7 @@
 
             <div class="contact-form">
               <h5 class="text-center">Contact Us</h5>
-              <form id="contact-form">
+              <form id="contact-form" action="/send" method="POST">
                 <div class="form-group">
                   <!-- <label for="email">Email:</label> -->
                   <input type="email" id="email" name="email" placeholder="Enter your e-mail id" required >
@@ -426,15 +426,7 @@
           <div class="col-md-6">
             <p>© 2024 All rights reserved | LINGUIST</p>
           </div>
-          <!-- <div class="col-md-5 text-center tool">
-            <p>Frontend developed with ❤️ by Dedipya Goswami</p>
-            <div class="tooltips">
-              <span class="tooltiptext"> <a href="https://github.com/dedipya001">Visit GitHub <svg
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" color="white">
-                    <path
-                      d="M12 0C5.4 0 0 5.4 0 12c0 5.3 3.4 9.8 8.1 11.4.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.6-4-1.6-.5-1.2-1.3-1.6-1.3-1.6-1-.6.1-.6.1-.6 1.2.1 1.8 1.3 1.8 1.3 1 1.7 2.7 1.2 3.4.9.1-.7.4-1.2.8-1.5-3-.4-6.2-1.5-6.2-6.8 0-1.5.5-2.7 1.3-3.6-.1-.4-.6-1.7.1-3.5 0 0 1.1-.4 3.6 1.3 1-.3 2-.5 3-.5s2 .2 3 .5c2.5-1.7 3.6-1.3 3.6-1.3.7 1.9.2 3.1.1 3.5.8.9 1.3 2.1 1.3 3.6 0 5.3-3.2 6.5-6.2 6.8.5.4.9 1.1.9 2.2v3.3c0 .4.2.8.8.6C20.6 21.8 24 17.3 24 12c0-6.6-5.4-12-12-12z" />
-                  </svg></a></span>
-            </div> -->
+          
           </div>
 
         </div>
@@ -448,7 +440,7 @@
 
 
 
-
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
@@ -460,6 +452,7 @@
   <script src="/JS/chatbot.js"></script>
   <script src="/JS/script.js"></script>
   <script src="/JS/cursor.js"></script>
+  <script src="/JS/query.js"></script>
 
 </body>
 
