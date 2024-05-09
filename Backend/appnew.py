@@ -27,9 +27,6 @@ load_dotenv()
 
 model = MBartForConditionalGeneration.from_pretrained("facebook/mbart-large-50-one-to-many-mmt")
 tokenizer = MBart50TokenizerFast.from_pretrained("facebook/mbart-large-50-one-to-many-mmt", src_lang="en_XX")
-
-
-
 language_mapping = {
     "arabic": "ar_AR",
     "english": "en_XX",
@@ -41,9 +38,6 @@ language_mapping = {
     "tamil": "ta_IN",
     "telugu": "te_IN"
 }
-
-
-
 @app.get("/")
 def index():
     return {"message": "Welcome to the translation API!"}

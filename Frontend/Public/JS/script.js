@@ -272,12 +272,16 @@ document.getElementById("transcontainer").addEventListener("submit", async funct
   event.preventDefault();
 
   // Show loader
-  document.getElementById("loadertrans").style.display = "block";
+  document.getElementById("loader2").style.display = "block";
 
   const inputText = document.getElementById("input-text").value;
   const inputLanguage = document.getElementById("input-language").value;
   const outputLanguage = document.getElementById("output-language").value;
   const outputLanguageCode = language_map[outputLanguage];
+
+  document.getElementById("output-text").innerHTML = " ";
+
+  
   if (!inputLanguage) {
     console.error("Please select an input language.");
     return;
@@ -286,7 +290,7 @@ document.getElementById("transcontainer").addEventListener("submit", async funct
   if (inputLanguage === outputLanguage) {
     document.getElementById("output-text").textContent = inputText + "\n(input and output languages are the same)";
     // Hide loader
-    document.getElementById("loadertrans").style.display = "none";
+    document.getElementById("loader2").style.display = "none";
     return;
   }
 
@@ -327,12 +331,12 @@ document.getElementById("transcontainer").addEventListener("submit", async funct
 
       const translatedText = await response.json();
       document.getElementById("output-text").textContent = translatedText[0];
-      document.getElementById("loadertrans").style.display = "none";
+      document.getElementById("loader2").style.display = "none";
 
       setTimeout(showPopup, 5000); // Show popup after 1 second delay
     } catch (error) {
       console.error("Translation error:", error);
-      document.getElementById("loadertrans").style.display = "none";
+      document.getElementById("loader2").style.display = "none";
 
       document.getElementById("output-text").textContent =
         "Translation failed.";
@@ -397,12 +401,12 @@ document.getElementById("transcontainer").addEventListener("submit", async funct
       // Check if the response contains translated_text
       if (result && result.translated_text && result.translated_text[outputLanguageCode]) {
         translatedText = result.translated_text[outputLanguageCode];
-        document.getElementById("loadertrans").style.display = "none";
+        document.getElementById("loader2").style.display = "none";
 
         console.log("Translated text:", translatedText);
       } else {
         console.error("Translation failed: Translated text not found in response.");
-        document.getElementById("loadertrans").style.display = "none";
+        document.getElementById("loader2").style.display = "none";
         
 
         document.getElementById("output-text").innerHTML = "Translation failed: Translated text not found in response.";
@@ -412,7 +416,7 @@ document.getElementById("transcontainer").addEventListener("submit", async funct
     } catch (error) {
       console.error(error);
       document.getElementById("output-text").innerHTML = "Translation failed.";
-      document.getElementById("loadertrans").style.display = "none";
+      document.getElementById("loader2").style.display = "none";
 
       return;
     }
@@ -421,6 +425,7 @@ document.getElementById("transcontainer").addEventListener("submit", async funct
     document.getElementById("output-text").innerHTML = translatedText;
     
     console.log("Translation done");
+
 
   }});
 

@@ -18,6 +18,7 @@ const API_KEY = process.env.API_KEY;
 // Serve static files from the 'Public' directory
 app.use(express.static(path.join(__dirname, 'Public')));
 app.use(bodyParser.json());
+
 app.use(express.json());
 
 // Connection to MySQL database
