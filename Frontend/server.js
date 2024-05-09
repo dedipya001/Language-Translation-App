@@ -4,7 +4,6 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } = require('@google/generative-ai');
 const dotenv = require('dotenv').config()
-const nodemailer = require('nodemailer');
 
 
 
@@ -18,7 +17,6 @@ const API_KEY = process.env.API_KEY;
 // Serve static files from the 'Public' directory
 app.use(express.static(path.join(__dirname, 'Public')));
 app.use(bodyParser.json());
-
 app.use(express.json());
 
 // Connection to MySQL database
@@ -295,10 +293,22 @@ async function runChat(userInput) {
   return response.text();
 }
 
+app.post('/chat', async (req, res) => {
+  try {
+    const userInput = req.body?.userInput;
+    console.log('incoming /chat req', userInput)
+    if (!userInput) {
+      return res.status(400).json({ error: 'Invalid request body' });
+    }
 
-
+    const response = await runChat(userInput);
+    res.json({ response });
+  } catch (error) {
+    console.error('Error in chat endpoint:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
-

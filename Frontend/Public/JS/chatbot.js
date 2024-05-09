@@ -122,6 +122,3 @@ form.addEventListener('submit', (event) => {
 //     sendMessage();
 //   });
 // });
-
-
-
